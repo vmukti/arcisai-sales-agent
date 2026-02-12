@@ -3,7 +3,7 @@ ArcisAI Independent AI Sales Agent - Web App
 Deploy on Render.com: python app.py
 Your team uploads leads â AI sends personalized emails automatically
 """
-import os, json, smtplib, uuid, socket
+import os, json, smtplib, uuid, socket, urllib.request, urllib.error
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -11,7 +11,9 @@ from flask import Flask, request, jsonify, render_template_string
 
 app = Flask(__name__)
 
-# Config
+# Config - Email provider: "resend" (HTTP API, works on Render) or "smtp"
+EMAIL_PROVIDER = os.environ.get("EMAIL_PROVIDER", "resend")
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
 SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.environ.get("SMTP_PORT", "465"))
 SMTP_USER = os.environ.get("SMTP_USER", "marketing@adiance.com")
@@ -98,21 +100,49 @@ def build_email_html(first_name, company, requirement, score):
 </html>"""
     return subject, html, priority
 
-def send_email(to_email, subject, html_body):
+def send_email_resend(to_email, subject, html_body):
+    """Send email via Resend HTTP API (works on Render free tier)"""
+    if not RESEND_API_KEY:
+        raise Exception("RESEND_API_KEY not configured")
+    payload = json.dumps({
+        "from": f"{FROM_NAME} <{SMTP_USER}>",
+        "to": [to_email],
+        "subject": subject,
+        "html": html_body,
+        "reply_to": SMTP_USER
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {RESEND_API_KEY}",
+            "Content-Type": "application/json"
+        },
+        method="POST"
+    )
+    try:
+        resp = urllib.request.urlopen(req, timeout=10)
+        result = json.loads(resp.read().decode())
+        return True
+    except urllib.error.HTTPError as e:
+        body = e.read().decode()
+        raise Exception(f"Resend API error {e.code}: {body}")
+
+def send_email_smtp(to_email, subject, html_body):
+    """Send email via SMTP (for servers that allow outbound SMTP)"""
     msg = MIMEMultipart("alternative")
     msg["From"] = f"{FROM_NAME} <{SMTP_USER}>"
     msg["To"] = to_email
     msg["Subject"] = subject
     msg["Reply-To"] = SMTP_USER
     msg.attach(MIMEText(html_body, "html"))
-    # Try SSL (port 465) first, then TLS (port 587)
     errors = []
     for method in ["ssl", "tls"]:
         try:
             if method == "ssl":
-                server = smtplib.SMTP_SSL(SMTP_HOST, 465, timeout=20)
+                server = smtplib.SMTP_SSL(SMTP_HOST, 465, timeout=8)
             else:
-                server = smtplib.SMTP(SMTP_HOST, 587, timeout=20)
+                server = smtplib.SMTP(SMTP_HOST, 587, timeout=8)
                 server.starttls()
             server.login(SMTP_USER, SMTP_PASS)
             server.sendmail(SMTP_USER, to_email, msg.as_string())
@@ -121,6 +151,15 @@ def send_email(to_email, subject, html_body):
         except Exception as e:
             errors.append(f"{method}: {str(e)}")
     raise Exception(" | ".join(errors))
+
+def send_email(to_email, subject, html_body):
+    """Route to correct email provider"""
+    if EMAIL_PROVIDER == "resend" and RESEND_API_KEY:
+        return send_email_resend(to_email, subject, html_body)
+    elif EMAIL_PROVIDER == "smtp":
+        return send_email_smtp(to_email, subject, html_body)
+    else:
+        raise Exception("No email provider configured. Set RESEND_API_KEY or EMAIL_PROVIDER=smtp")
 
 # ============ HTML TEMPLATE ============
 DASHBOARD_HTML = """<!DOCTYPE html>
