@@ -3,7 +3,7 @@ ArcisAI Independent AI Sales Agent - Web App
 Deploy on Render.com: python app.py
 Your team uploads leads â AI sends personalized emails automatically
 """
-import os, json, smtplib, uuid
+import os, json, smtplib, uuid, socket
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 # Config
 SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "465"))
 SMTP_USER = os.environ.get("SMTP_USER", "marketing@adiance.com")
 SMTP_PASS = os.environ.get("SMTP_PASS", "wtzvxbtxgolkblue")
 FROM_NAME = "ArcisAI Sales Team"
@@ -105,12 +105,22 @@ def send_email(to_email, subject, html_body):
     msg["Subject"] = subject
     msg["Reply-To"] = SMTP_USER
     msg.attach(MIMEText(html_body, "html"))
-    server = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15)
-    server.starttls()
-    server.login(SMTP_USER, SMTP_PASS)
-    server.sendmail(SMTP_USER, to_email, msg.as_string())
-    server.quit()
-    return True
+    # Try SSL (port 465) first, then TLS (port 587)
+    errors = []
+    for method in ["ssl", "tls"]:
+        try:
+            if method == "ssl":
+                server = smtplib.SMTP_SSL(SMTP_HOST, 465, timeout=20)
+            else:
+                server = smtplib.SMTP(SMTP_HOST, 587, timeout=20)
+                server.starttls()
+            server.login(SMTP_USER, SMTP_PASS)
+            server.sendmail(SMTP_USER, to_email, msg.as_string())
+            server.quit()
+            return True
+        except Exception as e:
+            errors.append(f"{method}: {str(e)}")
+    raise Exception(" | ".join(errors))
 
 # ============ HTML TEMPLATE ============
 DASHBOARD_HTML = """<!DOCTYPE html>
