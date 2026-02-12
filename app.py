@@ -105,7 +105,7 @@ def send_email_resend(to_email, subject, html_body):
     if not RESEND_API_KEY:
         raise Exception("RESEND_API_KEY not configured")
     payload = json.dumps({
-        "from": f"{FROM_NAME} <{SMTP_USER}>",
+        "from": f"{FROM_NAME} <onboarding@resend.dev>",
         "to": [to_email],
         "subject": subject,
         "html": html_body,
