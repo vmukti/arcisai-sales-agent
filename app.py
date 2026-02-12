@@ -116,7 +116,8 @@ def send_email_resend(to_email, subject, html_body):
         data=payload,
         headers={
             "Authorization": f"Bearer {RESEND_API_KEY}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "User-Agent": "ArcisAI-SalesAgent/1.0"
         },
         method="POST"
     )
