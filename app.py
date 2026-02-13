@@ -20,6 +20,7 @@ SMTP_PORT = int(os.environ.get("SMTP_PORT", "465"))
 SMTP_USER = os.environ.get("SMTP_USER", "marketing@adiance.com")
 SMTP_PASS = os.environ.get("SMTP_PASS", "wtzvxbtxgolkblue")
 FROM_NAME = "ArcisAI Sales Team"
+FROM_EMAIL = os.environ.get("FROM_EMAIL", "onboarding@resend.dev")
 LEADS_FILE = "leads_db.json"
 
 # Config - WhatsApp via Twilio
@@ -218,11 +219,13 @@ def format_phone_for_whatsapp(phone):
 def send_whatsapp_twilio(to_phone, message_body):
     """Send WhatsApp message via Twilio REST API using urllib (no external library needed)"""
     if not TWILIO_ACCOUNT_SID or not TWILIO_AUTH_TOKEN:
-        raise Exception("Twilio credentials not configured")
+        raise Exception("Twilio credentials not configured. Set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN in Render Environment Variables.")
 
     formatted_phone = format_phone_for_whatsapp(to_phone)
     if not formatted_phone:
         raise Exception(f"Invalid phone number: {to_phone}")
+
+    print(f"[WHATSAPP] Sending to {formatted_phone} from {TWILIO_WHATSAPP_FROM}...")
 
     # Twilio Messages API endpoint
     url = f"https://api.twilio.com/2010-04-01/Accounts/{TWILIO_ACCOUNT_SID}/Messages.json"
@@ -253,18 +256,25 @@ def send_whatsapp_twilio(to_phone, message_body):
         result = json.loads(resp.read().decode())
         sid = result.get("sid", "")
         status = result.get("status", "")
+        print(f"[WHATSAPP] SUCCESS: sid={sid}, status={status}")
         return True, f"sent (sid: {sid}, status: {status})"
     except urllib.error.HTTPError as e:
         body = e.read().decode()
+        print(f"[WHATSAPP] FAILED: {e.code} - {body}")
         raise Exception(f"Twilio API error {e.code}: {body}")
+    except Exception as e:
+        print(f"[WHATSAPP] ERROR: {str(e)}")
+        raise
 
 # ============ EMAIL SENDERS ============
 def send_email_resend(to_email, subject, html_body):
     """Send email via Resend HTTP API (works on Render free tier)"""
     if not RESEND_API_KEY:
-        raise Exception("RESEND_API_KEY not configured")
+        raise Exception("RESEND_API_KEY not configured. Set it in Render Environment Variables.")
+    from_addr = FROM_EMAIL
+    print(f"[EMAIL] Sending to {to_email} from {from_addr} via Resend...")
     payload = json.dumps({
-        "from": f"{FROM_NAME} <onboarding@resend.dev>",
+        "from": f"{FROM_NAME} <{from_addr}>",
         "to": [to_email],
         "subject": subject,
         "html": html_body,
@@ -283,10 +293,15 @@ def send_email_resend(to_email, subject, html_body):
     try:
         resp = urllib.request.urlopen(req, timeout=10)
         result = json.loads(resp.read().decode())
+        print(f"[EMAIL] SUCCESS: {result}")
         return True
     except urllib.error.HTTPError as e:
         body = e.read().decode()
+        print(f"[EMAIL] FAILED: {e.code} - {body}")
         raise Exception(f"Resend API error {e.code}: {body}")
+    except Exception as e:
+        print(f"[EMAIL] ERROR: {str(e)}")
+        raise
 
 def send_email_smtp(to_email, subject, html_body):
     """Send email via SMTP (for servers that allow outbound SMTP)"""
@@ -406,7 +421,7 @@ textarea{grid-column:1/-1;height:80px;resize:vertical}
     </div>
 
     <div class="card">
-        <h2>Upload CSV of Leads — Auto Email + WhatsApp</h2>
+        <h2>Upload CSV of Leads â Auto Email + WhatsApp</h2>
         <p style="color:#666;font-size:14px;margin-bottom:10px">Upload your daily inbound leads CSV. The AI agent will <strong>automatically send personalized emails AND WhatsApp messages</strong> to every lead.</p>
         <p style="color:#888;font-size:13px;margin-bottom:12px">CSV format: <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">name, email, company, phone, requirement, customer_type</code>
         &nbsp; <a href="#" onclick="downloadSampleCSV();return false" style="color:#3b82f6;font-size:13px">Download Sample CSV</a></p>
@@ -658,13 +673,20 @@ def add_lead():
         leads.insert(0, lead)
         save_leads(leads)
 
-        overall_success = email_status.startswith("sent")
+        email_ok = email_status.startswith("sent")
+        overall_success = email_ok
         return jsonify({
             "success": overall_success,
             "lead": lead,
             "email_status": email_status,
             "whatsapp_status": whatsapp_status,
-            "error": email_status if "failed" in email_status else None
+            "error": None if email_ok else email_status,
+            "debug": {
+                "email_provider": EMAIL_PROVIDER,
+                "from_email": FROM_EMAIL,
+                "resend_key_set": bool(RESEND_API_KEY),
+                "twilio_configured": bool(TWILIO_ACCOUNT_SID)
+            }
         })
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
@@ -683,6 +705,40 @@ def health():
             "whatsapp": "twilio" if TWILIO_ACCOUNT_SID else "not configured"
         }
     })
+
+
+@app.route("/api/test")
+def test_config():
+    """Debug endpoint - tests all configurations and sends test email/WhatsApp"""
+    results = {"email_provider": EMAIL_PROVIDER, "from_email": FROM_EMAIL}
+    if RESEND_API_KEY:
+        results["resend_key"] = f"set ({len(RESEND_API_KEY)} chars, starts with {RESEND_API_KEY[:6]}...)"
+    else:
+        results["resend_key"] = "NOT SET"
+    results["smtp_user"] = SMTP_USER or "NOT SET"
+    if TWILIO_ACCOUNT_SID:
+        results["twilio_sid"] = f"set ({TWILIO_ACCOUNT_SID[:8]}...)"
+    else:
+        results["twilio_sid"] = "NOT SET"
+    results["twilio_token"] = "set" if TWILIO_AUTH_TOKEN else "NOT SET"
+    results["twilio_from"] = TWILIO_WHATSAPP_FROM or "NOT SET"
+    test_email = request.args.get("email", "")
+    test_phone = request.args.get("phone", "")
+    if test_email:
+        try:
+            send_email(test_email, "ArcisAI Test - Email Working!", "<h2>Email is working!</h2><p>Your ArcisAI Sales Agent email setup is confirmed.</p>")
+            results["email_test"] = f"SUCCESS - sent to {test_email}"
+        except Exception as e:
+            results["email_test"] = f"FAILED - {str(e)}"
+    if test_phone:
+        try:
+            success, detail = send_whatsapp_twilio(test_phone, "ArcisAI Test - WhatsApp is working! Your sales agent is live.")
+            results["whatsapp_test"] = f"SUCCESS - {detail}"
+        except Exception as e:
+            results["whatsapp_test"] = f"FAILED - {str(e)}"
+    if not test_email and not test_phone:
+        results["usage"] = "Add ?email=you@email.com&phone=+919687779999 to test sending"
+    return jsonify(results)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
