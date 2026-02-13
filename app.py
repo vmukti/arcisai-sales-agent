@@ -43,61 +43,70 @@ def score_lead(name, company, requirement, customer_type=""):
     if any(w in req for w in ["urgent", "immediate", "asap", "this month"]): score += 5
     return min(score, 100)
 
-def build_email_html(first_name, company, requirement, score):
-    if score >= 75:
-        tone = "I'm personally reaching out because your requirements are a great fit for our solutions."
-        priority = "HIGH PRIORITY"
-    elif score >= 50:
-        tone = "Based on your requirements, I believe we have some excellent solutions for you."
-        priority = "MEDIUM"
-    else:
-        tone = "Thank you for reaching out - we'd love to learn more about your needs."
-        priority = "NORMAL"
+def build_email_html(first_name, company, requirement, score, customer_type=""):
+    """Build personalized email based on customer type — short, personal, action-oriented"""
+    ct = (customer_type or "").lower()
+    wa_link = "https://wa.me/919687779999"
+    req_display = requirement or "security cameras"
 
+    # Priority
+    priority = "HIGH PRIORITY" if score >= 75 else "MEDIUM" if score >= 50 else "NORMAL"
+
+    # Subject line — feels personal, not automated
     if company and company.lower() not in ["na", "none", "", "n/a"]:
-        subject = f"{company} x ArcisAI - AI CCTV Solutions Tailored for You"
+        subject = f"Re: {company} \u2014 camera requirement"
     else:
-        subject = f"Hi {first_name}, Your ArcisAI Security Consultation"
+        subject = f"Re: Your camera inquiry, {first_name}"
+
+    # Company context for body
+    co = f" for {company}" if company and company.lower() not in ["na", "none", "", "n/a"] else ""
+
+    # Customer-type-specific paragraphs
+    if ct == "si":
+        p1 = f"Just saw your inquiry \u2014 {req_display}{co}. We can definitely help with this."
+        p2 = "We work with 200+ SI partners across India and offer competitive project margins on our full AI camera range \u2014 ANPR, face recognition, crowd analytics, all with edge AI processing."
+        p3 = "Happy to share the SI price list and discuss your project scope. Fastest way \u2014 drop me a WhatsApp message and I\u2019ll send it across right now:"
+    elif ct == "dealer":
+        p1 = f"Noted your interest in ArcisAI \u2014 {req_display}{co}."
+        p2 = "We\u2019re actively expanding our dealer network and offer attractive margins with marketing support. Our AI cameras are 100% Made in India (non-Chinese SoC) \u2014 strong pull in current market."
+        p3 = "I can share dealer pricing and current schemes. Just message me:"
+    elif ct == "government":
+        p1 = f"Thank you for your interest \u2014 {req_display}{co}."
+        p2 = "Our cameras are STQC certified, 100% Made in India with non-Chinese SoC, and deployed across multiple smart city and government projects. We\u2019re GeM listed as well."
+        p3 = "I can share compliance documents and project pricing. Let\u2019s connect:"
+    elif ct == "enterprise":
+        p1 = f"Saw your requirement \u2014 {req_display}{co}. This is right up our alley."
+        p2 = "We\u2019ve deployed similar setups across factories, warehouses, and corporate campuses. Our edge AI cameras handle ANPR, intrusion detection, crowd analytics \u2014 all on-device, no heavy server needed."
+        p3 = "Would love to understand your exact setup and share a tailored proposal:"
+    elif ct == "residential":
+        p1 = f"Thanks for checking out ArcisAI! I see you\u2019re interested in {req_display}{co}."
+        p2 = "Our home security cameras come with AI-powered smart detection, night vision, and easy mobile app monitoring. We have options starting from budget-friendly to premium setups."
+        p3 = "Happy to help you pick the right cameras for your home. Just message us:"
+    else:
+        p1 = f"Thanks for your interest in ArcisAI! I see you\u2019re looking at {req_display}{co}."
+        p2 = "Our AI-powered cameras are designed and made in India, with smart detection, night vision, and remote monitoring built right in. We have options for every budget and scale."
+        p3 = "Happy to help you find the right fit. Best way to connect:"
 
     html = f"""<html>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0;">
-<div style="max-width: 640px; margin: 0 auto; background: #ffffff;">
-    <div style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); padding: 30px; text-align: center;">
-        <h1 style="color: white; margin: 0; font-size: 28px;">ArcisAI</h1>
-        <p style="color: #93c5fd; margin: 8px 0 0 0; font-size: 14px;">India's AI-First CCTV Security Platform</p>
-    </div>
-    <div style="padding: 30px;">
-        <p style="font-size: 16px;">Hi {first_name},</p>
-        <p>{tone}</p>
-        <p>I noticed you're looking for <strong>{requirement or 'security solutions'}</strong>{' for ' + company if company and company.lower() not in ['na','none','','n/a'] else ''}. That's exactly what we specialize in.</p>
-        <div style="background: #f0f9ff; border-left: 4px solid #1e3a8a; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0;">
-            <h3 style="margin-top: 0; color: #1e3a8a;">Why ArcisAI?</h3>
-            <p><strong>100% Made in India</strong> - Non-Chinese SoC, STQC certified for government</p>
-            <p><strong>AI-Powered Analytics</strong> - 8+ edge AI detections in under 500ms</p>
-            <p><strong>ArcisGPT</strong> - India's first Gen AI for CCTV video search</p>
-            <p><strong>70% bandwidth savings</strong> - Intelligent compression + edge processing</p>
-        </div>
-        <p>To help me recommend the perfect solution, could you share:</p>
-        <ol>
-            <li>What's your <strong>budget range</strong> for the project?</li>
-            <li>What's your <strong>timeline</strong> - when do you need cameras installed?</li>
-            <li>Do you have any <strong>existing CCTV infrastructure</strong>?</li>
-        </ol>
-        <div style="text-align: center; margin: 30px 0;">
-            <a href="https://arcisai.io/products" style="background: #1e3a8a; color: white; padding: 14px 36px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; font-size: 16px;">Explore Our Products</a>
-        </div>
-        <p style="color: #666; font-size: 14px;">Or just reply to this email - I'll personally get back to you within a few hours.</p>
-        <div style="border-top: 1px solid #eee; padding-top: 20px; margin-top: 20px;">
-            <p style="margin: 0;"><strong>ArcisAI Sales Team</strong></p>
-            <p style="margin: 4px 0; color: #666; font-size: 14px;">
-                Website: <a href="https://arcisai.io">arcisai.io</a> |
-                WhatsApp: <a href="https://wa.me/918320551897">+91 83205 51897</a>
-            </p>
-        </div>
-    </div>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;color:#222;margin:0;padding:20px;">
+<div style="max-width:560px;">
+<p>Hi {first_name},</p>
+<p>{p1}</p>
+<p>{p2}</p>
+<p>{p3}</p>
+<p style="margin:20px 0;">
+<a href="{wa_link}" style="background:#25D366;color:white;padding:12px 24px;text-decoration:none;border-radius:6px;font-weight:600;font-size:15px;">\u1f4ac WhatsApp Us</a>
+&nbsp;&nbsp;or call <strong>+91 96877 79999</strong>
+</p>
+<p style="color:#555;font-size:14px;">Or just reply to this email \u2014 I\u2019ll get back within a few hours.</p>
+<p style="margin-top:25px;padding-top:15px;border-top:1px solid #eee;">
+Regards,<br><strong>ArcisAI Sales Team</strong><br>
+<span style="color:#888;font-size:13px;"><a href="https://arcisai.io" style="color:#1e3a8a;">arcisai.io</a> \u00b7 India\u2019s AI-First CCTV Platform</span>
+</p>
 </div>
 </body>
 </html>"""
+
     return subject, html, priority
 
 def send_email_resend(to_email, subject, html_body):
@@ -355,7 +364,7 @@ def add_lead():
         first_name = name.split()[0] if name else "there"
 
         # Build and send email
-        subject, html, priority = build_email_html(first_name, company, full_req, score)
+        subject, html, priority = build_email_html(first_name, company, full_req, score, customer_type)
         email_status = "pending"
         try:
             send_email(email, subject, html)
