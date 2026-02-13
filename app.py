@@ -304,7 +304,8 @@ def send_email_resend(to_email, subject, html_body):
         raise
 
 def send_email_smtp(to_email, subject, html_body):
-    """Send email via SMTP (for servers that allow outbound SMTP)"""
+    """Send email via SMTP (Gmail/Google Workspace)"""
+    print(f"[SMTP] Sending to {to_email} from {SMTP_USER} via {SMTP_HOST}...")
     msg = MIMEMultipart("alternative")
     msg["From"] = f"{FROM_NAME} <{SMTP_USER}>"
     msg["To"] = to_email
@@ -328,13 +329,23 @@ def send_email_smtp(to_email, subject, html_body):
     raise Exception(" | ".join(errors))
 
 def send_email(to_email, subject, html_body):
-    """Route to correct email provider"""
-    if EMAIL_PROVIDER == "resend" and RESEND_API_KEY:
-        return send_email_resend(to_email, subject, html_body)
-    elif EMAIL_PROVIDER == "smtp":
-        return send_email_smtp(to_email, subject, html_body)
-    else:
-        raise Exception("No email provider configured. Set RESEND_API_KEY or EMAIL_PROVIDER=smtp")
+    """Try SMTP first (Gmail/Google Workspace), fall back to Resend API"""
+    errors = []
+    # Try SMTP first if credentials are available
+    if SMTP_USER and SMTP_PASS:
+        try:
+            print(f"[EMAIL] Trying SMTP ({SMTP_USER})...")
+            return send_email_smtp(to_email, subject, html_body)
+        except Exception as e:
+            errors.append(f"SMTP: {str(e)}")
+            print(f"[EMAIL] SMTP failed: {str(e)}, trying Resend...")
+    # Fall back to Resend API
+    if RESEND_API_KEY:
+        try:
+            return send_email_resend(to_email, subject, html_body)
+        except Exception as e:
+            errors.append(f"Resend: {str(e)}")
+    raise Exception("All email methods failed: " + " | ".join(errors))
 
 # ============ HTML TEMPLATE ============
 DASHBOARD_HTML = """<!DOCTYPE html>
@@ -421,7 +432,7 @@ textarea{grid-column:1/-1;height:80px;resize:vertical}
     </div>
 
     <div class="card">
-        <h2>Upload CSV of Leads â Auto Email + WhatsApp</h2>
+        <h2>Upload CSV of Leads Ã¢ÂÂ Auto Email + WhatsApp</h2>
         <p style="color:#666;font-size:14px;margin-bottom:10px">Upload your daily inbound leads CSV. The AI agent will <strong>automatically send personalized emails AND WhatsApp messages</strong> to every lead.</p>
         <p style="color:#888;font-size:13px;margin-bottom:12px">CSV format: <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">name, email, company, phone, requirement, customer_type</code>
         &nbsp; <a href="#" onclick="downloadSampleCSV();return false" style="color:#3b82f6;font-size:13px">Download Sample CSV</a></p>
