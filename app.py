@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 ArcisAI Independent AI Sales Agent - Web App
 Deploy on Render.com: python app.py
@@ -49,7 +50,386 @@ def score_lead(name, company, requirement, customer_type=""):
     if any(w in req for w in ["urgent", "immediate", "asap", "this month"]): score += 5
     if "si" in ct or "dealer" in ct: score += 10
     return min(score, 100)
-ær·&WöF—7Æ—×¶6÷Òâv—fVâF†R7W'&VçB6ö×Æ–æ6R&WV—&VÖVçG2f÷"v÷fW&æÖVçB45Eb&ö7W&VÖVçBÂ’vçFVBFò&V6‚÷WBF—&V7FÇ’â ¢"Òb$gFW"F†RÔ„ÇS#—2Gf—6÷'’öâ6†–æW6RÖ÷&–v–â6ÖW&2Â6WfW&Âv÷fW&æÖVçB&ö¦V7G2†fRf6VBFVÆ—2&V6W6RfVæF÷'26÷VÆFåÇS#—B&÷f–FR&÷W"5E26W'F–f–6F–öâ÷"æöâÔ6†–æW6R6ô2Fö7VÖVçFF–öââvUÇS#—fR†VÇVB×VÇF—ÆRFW'FÖVçG2æf–vFRF†—26Öö÷F†Ç’â ¢2Òb#Ç7G&öæsä&6—4’—2gVÆÇ’&ö7W&VÖVçB×&VG“£Â÷7G&öæsãÆ'"óåÇS##"5E26W'F–f–VB†6W'F–f–6FRf–Æ&ÆR–ÖÖVF–FVÇ’“Æ'"óåÇS##"Æ—7FVBöâvTÒv—F‚7F—fR6B”CÆ'"óåÇS##"æöâÔ6†–æW6R6ô2ÇS#BRÖFR–â–æF–Æ'"óåÇS##"$•2Â•4ò#sÂ4RÂd426ö×Æ–çCÆ'"óåÇS##"‚VFvR’fVGW&W3¢å"Âf6RFWFV7F–öâÂ–çG'W6–öâÂf—&RÂRÂ7&÷vBæÇ—F–72ÂG&—v—&RÂÆö—FW&–æsÆ'"óåÇS##"FWÆ÷–VB7&÷726Ö'B6—G’ÂöÆ–6RÂFVfVæ6RÂæB5R&ö¦V7G2 ¢7FÒ$’6â6†&RF†R6ö×ÆWFR6ö×Æ–æ6RFö7VÖVçFF–öâ6¶vR…5E26W'F–f–6FRÂvTÒÆ—7F–ærÂ$•26W'F–f–6FRÂFV6†æ–6ÂFF6†VWB’&–v‡Bv’â6†ÆÂ’6VæBöâv†G4f÷"V–6²66W72Â÷"VÖ–Âv÷&·3ò ¢VÆ–b7BÓÒ&VçFW'&—6R# ¢Òb%6r–÷W"&WV—&VÖVçBf÷"·&WöF—7Æ—×¶6÷ÒÇS#BF†—2—2W†7FÇ’v†BvR7V6–Æ—¦R–ââ ¢"Òb$Ö÷7BVçFW'&—6W2vRv÷&²v—F‚vW&RV—F†W"––ærÆ¶‡2ÖöçF†Ç’f÷"6Æ÷VBÖ&6VBf–FVòæÇ—F–72F†EÇS#—26Æ÷ræB&—6W2FF&—f7’6öæ6W&ç2Â÷"W6–ær&6–26ÖW&2v—F‚¦W&ò–çFVÆÆ–vVæ6Râ&÷F‚6÷7BÖöæW’ÇS#BöæRF‡&÷Vv‚&–ÆÇ2ÂF†R÷F†W"F‡&÷Vv‚–æ6–FVçG2F†B6÷VÆB†fR&VVâ&WfVçFVBâ ¢2Òb#Ç7G&öæsä&6—4•ÇS#—2VFvR’6†ævW2F†—26ö×ÆWFVÇ“£Â÷7G&öæsãÆ'"óåÇS##"ÆÂ’&ö6W76–ær†Vç2öâÖ6ÖW&ÇS#BÃS×2ÆW'G2Â¦W&ò6Æ÷VB6÷7BÂRFF7F—2öâ×&VÖ—6SÆ'"óåÇS##"‚FWFV7F–öâG—W3¢–çG'W6–öâÂf—&RÂRÂå"Â7&÷vBÂf6RÂG&—v—&RÂÆö—FW&–æsÆ'"óåÇS##"66ÆW2g&öÒFò²6ÖW&2v—F‚6VçG&Æ—¦VBÖævVÖVçCÆ'"óåÇS##"S²VçFW'&—6RFWÆ÷–ÖVçG27&÷72–æF–†ÖçVf7GW&–ærÂv&V†÷W6W2Â†÷7—FÇ2Â6×W6W2’ ¢7FÒb$•ÇS#–BÆ÷fRFò6†÷r–÷RRÖÖ–âÆ—fRFVÖò7W7FöÖ—¦VBf÷"¶6õ÷6†÷'B÷"w–÷W"W6R66RwÒâ–÷UÇS#–ÆÂ6VRF†R’FWFV7F–öç2v÷&¶–ær–â&VÂ×F–ÖRâv†BF’v÷&·2F†—2vVV³ò ¢VÆ–b7BÓÒ'&W6–FVçF–Â# ¢Òb%F†æ·2f÷"–÷W"–çFW&W7B–â&6—4’6ÖW&7¶6÷Ò ¢"Òb$–b–÷UÇS#—&RÆöö¶–ærB6V7W&—G’6ÖW&2f÷"–÷W"†öÖR÷"6†÷Â–÷UÇS#—fR&ö&&Ç’6VVâGvòW‡G&VÖW2ÇS#B6†VÇS##“ƒ6ÖW&2F†BF–R–â2ÖöçF‡2Â÷"–×÷'FVB'&æG26†&v–ærÇS##“RÃ²W"6ÖW&âæV—F†W"Ö¶W26Vç6Râ ¢2Òb#Ç7G&öæsä÷W"V6òÕ6W&–W2†—G2F†R7vVWB7÷C£Â÷7G&öæsãÆ'"óåÇS##"’×÷vW&VB6ÖW&27F'F–ærBÇS##“2ÃSÆ'"óåÇS##"6Ö'BÆW'G2öâ–÷W"†öæR‡W'6öâFWFV7F–öâÂæ÷B§W7BÖ÷F–öâ“Æ'"óåÇS##"7'—7FÂ6ÆV"æ–v‡Bf—6–öâWFò3ÖWFW'3Æ'"óåÇS##"V7’Öö&–ÆRÇS#BvF6‚Æ—fRg&öÒç—v†W&SÆ'"óåÇS##"ÇVrÖæB×Æ’6WGWÂæòFV6†æ–6–âæVVFVBf÷"&6–2–ç7FÆÃÆ'"óåÇS##"ÖFR–â–æF–v—F‚"×–V"v'&çG’ ¢7FÒ$†÷rÖç’6ÖW&2&R–÷RF†–æ¶–æsòFVÆÂÖRF†R&V–÷RvçBFò6÷fW"æB•ÇS#–ÆÂ7VvvW7BF†R&W7B6¶vRv—F‚&–6–æröâv†G4â ¢VÇ6S ¢Òb$v÷B–÷W"–çV—'’&÷WB·&WöF—7Æ—×¶6÷ÒÇS#BF†æ·2f÷"6öç6–FW&–ær&6—4’â ¢"Òb%v†WF†W"–÷RæVVBB6ÖW&2÷"²ÂF†R6†ÆÆVævR—2F†R6ÖRÇS#Bf–æF–ær6ÖW&2F†B&R&VÆ–&ÆRÂ–çFVÆÆ–vVçBÂæB6ö×Æ–çBâÖ÷7B'&æG2V—F†W"Æ6²’fVGW&W2÷"6öÖRv—F‚6ö×Æ–æ6R&vvvRâ ¢2Òb#Ç7G&öæsä&6—4’6öÇfW2F†—3£Â÷7G&öæsãÆ'"óåÇS##"–æF–ÇS#—2Ö÷7BGfæ6VBVFvR’6ÖW&2ÇS#B‚FWFV7F–öâG—W2&ö6W76VBöâÖ6ÖW&Æ'"óåÇS##"2Õ6W&–W2‡&VÖ—VÒÂg&öÒÇS##“‚ÃS’æBV6òÕ6W&–W2‡fÇVRÂg&öÒÇS##“2ÃS“Æ'"óåÇS##"5E2²$•2²•4ò#s6W'F–f–VBÂÖFR–â–æF–Æ'"óåÇS##"BÖ6ÖW&†öÖR6WGW2Fò²6ÖW&VçFW'&—6RFWÆ÷–ÖVçG2 ¢7FÒ$•ÇS#–BÆ÷fRFòVæFW'7FæB–÷W"&WV—&VÖVçB&WGFW"âV–6²RÖÖ–â6ÆÂÂ÷"6†ÆÂ’6VæB&öGV7B6ö×&—6öâöâv†G4ò  ¢‡FÖÂÒb""#Æ‡FÖÃà£Æ&öG’7G–ÆSÒ&föçBÖfÖ–Ç“¢ÖÆR×7—7FVÒÂ&Æ–æ´Ö57—7FVÔföçBÂu6VvöRT’rÂ&ö&÷FòÂ6ç2×6W&–c²Æ–æRÖ†V–v‡C¢ãs²6öÆ÷#¢3333²Ö&v–ã¢²FF–æs¢²#à£ÆF—b7G–ÆSÒ&Ö‚×v–GFƒ¢cƒ²Ö&v–ã¢WFó²FF–æs¢#ƒ²#à¢Ç7G–ÆSÒ&föçB×6—¦S¢Wƒ²#ä†’¶f—'7EöæÖWÒÃÂ÷à¢Ç7G–ÆSÒ&föçB×6—¦S¢Wƒ²#ç·ÓÂ÷à¢Ç7G–ÆSÒ&föçB×6—¦S¢Wƒ²#ç·'ÓÂ÷à¢Ç7G–ÆSÒ&föçB×6—¦S¢Gƒ²#ç·7ÓÂ÷à¢Ç7G–ÆSÒ&föçB×6—¦S¢Wƒ²#ç¶7FÓÂ÷à¢ÆF—b7G–ÆSÒ&Ö&v–ã¢#W‚²#à¢Æ‡&VcÒ'·vöÆ–æ·Ò"7G–ÆSÒ&&6¶w&÷VæC¢3#TC3cc²6öÆ÷#¢v†—FS²FF–æs¢G‚3'ƒ²FW‡BÖFV6÷&F–öã¢æöæS²&÷&FW"×&F—W3¢‡ƒ²F—7Æ“¢–æÆ–æRÖ&Æö6³²föçB×vV–v‡C¢c²föçB×6—¦S¢Wƒ²#åÅScFcv†G4W2F—&V7FÇ“Âöà¢Ç7â7G–ÆSÒ&6öÆ÷#¢3ƒƒƒ²föçB×6—¦S¢7ƒ²Ö&v–âÖÆVgC¢ƒ²#æ÷"6ÆÂ³““cƒsrs““““Â÷7ãà¢ÂöF—cà¢Ç7G–ÆSÒ&Ö&v–ã¢²föçB×6—¦S¢Gƒ²#ä&W7B&Vv&G2ÃÂ÷à¢Ç7G–ÆSÒ&Ö&v–ã¢G‚²föçB×6—¦S¢Gƒ²#ãÇ7G&öæsä·W6†ÂÂ&6—4’6ÆW3Â÷7G&öæsãÂ÷à¢Ç7G–ÆSÒ&Ö&v–ã¢'‚²6öÆ÷#¢3ƒƒƒ²föçB×6—¦S¢7ƒ²#æ&6—6’æ–òÂ³““cƒsrs““““Â÷à£ÂöF—cà£Âö&öG“à£Âö‡FÖÃâ"" ¢&WGW&â7V&¦V7BÂ‡FÖÂÂ&–÷&—G ¢2ÓÓÓÓÓÓÓÓÓÓÓÒt„E4ÔU54tR%T”ÄDU"ÓÓÓÓÓÓÓÓÓÓÓĞ¦FVb'V–ÆE÷v†G6öÖW76vR†f—'7EöæÖRÂ6ö×ç’Â&WV—&VÖVçBÂ7W7FöÖW%÷G—SÒ""“ ¢""$'V–ÆB6†÷'BÂ6öçfW'6F–öæÂv†G4ÖW76vRf÷"–æF–â#$"Ö&¶WBÒÖ‚BÓRÆ–æW2"" ¢7BÒ†7W7FöÖW%÷G—R÷"""’æÆ÷vW"‚¢&W÷6†÷'BÒ‡&WV—&VÖVçB÷"'6V7W&—G’6ÖW&2"•³£cĞ¢6òÒb"‡¶6ö×ç—Ò’"–b6ö×ç’æB6ö×ç’æÆ÷vW"‚’æ÷B–â²&æ"Â&æöæR"Â""Â&âö%ÒVÇ6R"  ¢–b7BÓÒ'6’# ¢×6rÒb""$†’¶f—'7EöæÖWÒ¦—¶6÷ÒÅScCF  ¤v÷B–÷W"–çV—'’f÷"·&W÷6†÷'GÒà ¤&6—4’Ò5E26W'F–f–VB²‚’fVGW&W2öâÖ6ÖW&²æöâÔ6†–æW6R6ô2â#²4’'FæW'27&÷72–æF–Ç&VG’à ¥6†ÆÂ’6VæBF†R¥4’&–6RÆ—7B²Ö&v–âFWF–Ç2¢&–v‡B†W&Röâv†G4òÅScF6  ¥ÇS#B·W6†ÂÂ&6—4’Â&6—6’æ–ò"" ¢VÆ–b7BÓÒ&FVÆW"# ¢×6rÒb""$†’¶f—'7EöæÖWÒ¦—¶6÷ÒÅScCF  ¤&6—4’FVÆW"&öw&Ó ¥ÇS##"£CR²Ö&v–ç2¢„V6òÕ6W&–W2g&öÒÇS##“2ÃSÂ2Õ6W&–W2g&öÒÇS##“‚ÃS¥ÇS##"ÖFR–â–æF–Â5E26W'F–f–V@¥ÇS##"Ö&¶WF–ær¶—B²FVÖòVæ—G2–æ6ÇVFV@ ¥vUÇS#—&Röæ&ö&F–ær¦Æ–Ö—FVBFVÆW'2W"6—G’¢â–çFW&W7FVB–âF†R&–6RÆ—7CòÅScF6 ¥ÇS#B·W6†ÂÂ&6—4’Â&6—6’æ–ò"" ¢VÆ–b7BÓÒ&v÷fW&æÖVçB# ¢×6rÒb""$†’¶f—'7EöæÖWÒ¦—¶6÷ÒÅScCF  ¥&S¢·&W÷6†÷'GĞ ¤&6—4’—2¥5E26W'F–f–VB²vTÒÆ—7FVB²æöâÔ6†–æW6R6ô2²$•2²•4ò#s¢âgVÆÇ’6ö×Æ–çBf÷"v÷gB&ö7W&VÖVçBà ¤6â6†&RÆÂ6ö×Æ–æ6RFö72…5E26W'BÂvTÒFWF–Ç2ÂFF6†VWG2’&–v‡B†W&RâæVVBF†VÓòÅScF3@ ¥ÇS#B·W6†ÂÂ&6—4’Â&6—6’æ–ò"" ¢VÆ–b7BÓÒ&VçFW'&—6R# ¢×6rÒb""$†’¶f—'7EöæÖWÒ¦—¶6÷ÒÅScCF  ¥6r–÷W"&WV—&VÖVçBÇS#B·&W÷6†÷'GÒà ¤&6—4’Ò¤VFvR’öâÖ6ÖW&ÂÃS×2ÆW'G2Â¦W&ò6Æ÷VB6÷7B¢âS²6—FW2FWÆ÷–VB7&÷72–æF–à ¤6â’6†÷r–÷RV–6²RÖÖ–âFVÖò7W7FöÖ—¦VBf÷"–÷W"6WGWòÅSc6` ¥ÇS#B·W6†ÂÂ&6—4’Â&6—6’æ–ò"" ¢VÆ–b7BÓÒ'&W6–FVçF–Â# ¢×6rÒb""$†’¶f—'7EöæÖW×¶6÷ÒÅScCF  ¥F†æ·2f÷"–÷W"–çFW&W7B÷W"V6òÕ6W&–W2’6ÖW&27F'BB§W7B¥ÇS##“2ÃS¢ÇS#B6Ö'BÆW'G2Âæ–v‡Bf—6–öâÂÖö&–ÆR66W72à ¤†÷rÖç’6ÖW&2Fò–÷RæVVCò•ÇS#–ÆÂ6VæB–÷RF†R&W7B6¶vRv—F‚&–6–ærÅScFc ¥ÇS#B·W6†ÂÂ&6—4’Â&6—6’æ–ò"" ¢VÇ6S ¢×6rÒb""$†’¶f—'7EöæÖWÒ¦—¶6÷ÒÅScCF  ¤v÷B–÷W"–çV—'’&÷WB·&W÷6†÷'GÒâ&6—4’öffW'2–æF–ÇS#—2Ö÷7BGfæ6VB’6ÖW&2ÇS#B5E26W'F–f–VBÂÖFR–â–æF–ÂVFvR’&ö6W76–ærà ¤6â’6VæB–÷R&öGV7B6ö×&—6öâ²&–6–æröâv†G4òÅScF6  ¥ÇS#B·W6†ÂÂ&6—4’Â&6—6’æ–ò""  ¢&WGW&â×6p ¢2ÓÓÓÓÓÓÓÓÓÓÓÒt„E44TäDU"…Gv–Æ–ò$U5B’’ÓÓÓÓÓÓÓÓÓÓÓĞ¦FVbf÷&ÖE÷†öæUöf÷%÷v†G6‡†öæR“ ¢""$f÷&ÖB†öæRçVÖ&W"f÷"v†G4„RãcBf÷&ÖB’"" ¢–bæ÷B†öæS ¢&WGW&âæöæP¢2&VÖ÷fR76W2ÂF6†W2ÂF÷G2Â&VçF†W6W0¢6ÆVæVBÒ†öæRç7G&—‚’ç&WÆ6R‚""Â""’ç&WÆ6R‚"Ò"Â""’ç&WÆ6R‚"â"Â""’ç&WÆ6R‚"‚"Â""’ç&WÆ6R‚"’"Â""¢2&VÖ÷fRÆVF–ær²–b&W6VçB‡vRvÆÂFB—B&6²¢–b6ÆVæVBç7F'G7v—F‚‚"²"“ ¢6ÆVæVBÒ6ÆVæVE³¥Ğ¢2–b7F'G2v—F‚“æB—2"F–v—G2Â—Bw2–æF–à¢–b6ÆVæVBç7F'G7v—F‚‚#“"’æBÆVâ†6ÆVæVB’ÓÒ# ¢&WGW&âb"·¶6ÆVæVGÒ ¢2–bF–v—G2Â77VÖR–æF–âçVÖ&W ¢–bÆVâ†6ÆVæVB’ÓÒæB6ÆVæVE³Ò–â#csƒ’# ¢&WGW&âb"³“¶6ÆVæVGÒ ¢2–bÇ&VG’†26÷VçG'’6öFRƒ²F–v—G2¢–bÆVâ†6ÆVæVB’ãÒ ¢&WGW&âb"·¶6ÆVæVGÒ ¢&WGW&âæöæP ¦FVb6VæE÷v†G6÷Gv–Æ–ò‡Fõ÷†öæRÂÖW76vUö&öG’“ ¢""%6VæBv†G4ÖW76vRf–Gv–Æ–ò$U5B’W6–ærW&ÆÆ–"†æòW‡FW&æÂÆ–'&'’æVVFVB’"" ¢–bæ÷BEt”Ä”õô44õTåEõ4”B÷"æ÷BEt”Ä”õôUD…õDô´Tã ¢&—6RW†6WF–öâ‚%Gv–Æ–ò7&VFVçF–Ç2æ÷B6öæf–wW&VB" ¢f÷&ÖGFVE÷†öæRÒf÷&ÖE÷†öæUöf÷%÷v†G6‡Fõ÷†öæR¢–bæ÷Bf÷&ÖGFVE÷†öæS ¢&—6RW†6WF–öâ†b$–çfÆ–B†öæRçVÖ&W#¢·Fõ÷†öæWÒ" ¢2Gv–Æ–òÖW76vW2’VæGö–ç@¢W&ÂÒb&‡GG3¢òö’çGv–Æ–òæ6öÒó#ÓBÓô66÷VçG2÷µEt”Ä”õô44õTåEõ4”GÒôÖW76vW2æ§6öâ  ¢2&6–2WFƒ¢&6ScB…4”C¤WF…Fö¶Vâ¢WF…÷7G"Ò&6ScBæ#cFVæ6öFR†b'µEt”Ä”õô44õTåEõ4”GÓ§µEt”Ä”õôUD…õDô´TçÒ"æVæ6öFR‚’’æFV6öFR‚ ¢2f÷&ÒÖVæ6öFVB&öG’…Gv–Æ–òW6W2Æ–6F–öâ÷‚×wwrÖf÷&Ò×W&ÆVæ6öFVB¢–ÆöBÒW&ÆÆ–"ç'6RçW&ÆVæ6öFR‡°¢$g&öÒ#¢b'v†G6§µEt”Ä”õõt„E4ôe$ô×Ò"À¢%Fò#¢b'v†G6§¶f÷&ÖGFVE÷†öæWÒ"À¢$&öG’#¢ÖW76vUö&öG¢Ò’æVæ6öFR‚'WFbÓ‚" ¢&WÒW&ÆÆ–"ç&WVW7Bå&WVW7B€¢W&ÂÀ¢FF×–ÆöBÀ¢†VFW'3×°¢$WF†÷&—¦F–öâ#¢b$&6–2¶WF…÷7G'Ò"À¢$6öçFVçBÕG—R#¢&Æ–6F–öâ÷‚×wwrÖf÷&Ò×W&ÆVæ6öFVB"À¢%W6W"ÔvVçB#¢$&6—4’Õ6ÆW4vVçBóã ¢ÒÀ¢ÖWF†öCÒ%õ5B ¢ ¢G'“ ¢&W7ÒW&ÆÆ–"ç&WVW7BçW&Æ÷Vâ‡&WÂF–ÖV÷WCÓR¢&W7VÇBÒ§6öâæÆöG2‡&W7ç&VB‚’æFV6öFR‚’¢6–BÒ&W7VÇBævWB‚'6–B"Â""¢7FGW2Ò&W7VÇBævWB‚'7FGW2"Â""¢&WGW&âG'VRÂb'6VçB‡6–C¢·6–GÒÂ7FGW3¢·7FGW7Ò’ ¢W†6WBW&ÆÆ–"æW'&÷"ä…EEW'&÷"2S ¢&öG’ÒRç&VB‚’æFV6öFR‚¢&—6RW†6WF–öâ†b%Gv–Æ–ò’W'&÷"¶Ræ6öFWÓ¢¶&öG—Ò" ¢2ÓÓÓÓÓÓÓÓÓÓÓÒTÔ”Â4TäDU%2ÓÓÓÓÓÓÓÓÓÓÓĞ¦FVb6VæEöVÖ–Å÷&W6VæB‡FõöVÖ–ÂÂ7V&¦V7BÂ‡FÖÅö&öG’“ ¢""%6VæBVÖ–Âf–&W6VæB…EE’‡v÷&·2öâ&VæFW"g&VRF–W"’"" ¢–bæ÷B$U4TäEô•ô´U“ ¢&—6RW†6WF–öâ‚%$U4TäEô•ô´U’æ÷B6öæf–wW&VB"¢–ÆöBÒ§6öâæGV×2‡°¢&g&öÒ#¢b'´e$ôÕôäÔWÒÆöæ&ö&F–æt&W6VæBæFWcâ"À¢'Fò#¢·FõöVÖ–ÅÒÀ¢'7V&¦V7B#¢7V&¦V7BÀ¢&‡FÖÂ#¢‡FÖÅö&öG’À¢'&WÇ•÷Fò#¢4ÕEõU4U ¢Ò’æVæ6öFR‚'WFbÓ‚"¢&WÒW&ÆÆ–"ç&WVW7Bå&WVW7B€¢&‡GG3¢òö’ç&W6VæBæ6öÒöVÖ–Ç2"À¢FF×–ÆöBÀ¢†VFW'3×°¢$WF†÷&—¦F–öâ#¢b$&V&W"µ$U4TäEô•ô´U—Ò"À¢$6öçFVçBÕG—R#¢&Æ–6F–öâö§6öâ"À¢%W6W"ÔvVçB#¢$&6—4’Õ6ÆW4vVçBóã ¢ÒÀ¢ÖWF†öCÒ%õ5B ¢¢G'“ ¢&W7ÒW&ÆÆ–"ç&WVW7BçW&Æ÷Vâ‡&WÂF–ÖV÷WCÓ¢&W7VÇBÒ§6öâæÆöG2‡&W7ç&VB‚’æFV6öFR‚’¢&WGW&âG'VP¢W†6WBW&ÆÆ–"æW'&÷"ä…EEW'&÷"2S ¢&öG’ÒRç&VB‚’æFV6öFR‚¢&—6RW†6WF–öâ†b%&W6VæB’W'&÷"¶Ræ6öFWÓ¢¶&öG—Ò" ¦FVb6VæEöVÖ–Å÷6×G‡FõöVÖ–ÂÂ7V&¦V7BÂ‡FÖÅö&öG’“ ¢""%6VæBVÖ–Âf–4ÕE†f÷"6W'fW'2F†BÆÆ÷r÷WF&÷VæB4ÕE’"" ¢×6rÒÔ”ÔT×VÇF—'B‚&ÇFW&æF—fR"¢×6u²$g&öÒ%ÒÒb'´e$ôÕôäÔWÒÇµ4ÕEõU4U'Óâ ¢×6u²%Fò%ÒÒFõöVÖ–À¢×6u²%7V&¦V7B%ÒÒ7V&¦V7@¢×6u²%&WÇ’ÕFò%ÒÒ4ÕEõU4U ¢×6ræGF6‚„Ô”ÔUFW‡B†‡FÖÅö&öG’Â&‡FÖÂ"’¢W'&÷'2ÒµĞ¢f÷"ÖWF†öB–â²'76Â"Â'FÇ2%Ó ¢G'“ ¢–bÖWF†öBÓÒ'76Â# ¢6W'fW"Ò6×GÆ–"å4ÕEõ54Â…4ÕEô„õ5BÂCcRÂF–ÖV÷WCÓ‚¢VÇ6S ¢6W'fW"Ò6×GÆ–"å4ÕE…4ÕEô„õ5BÂSƒrÂF–ÖV÷WCÓ‚¢6W'fW"ç7F'GFÇ2‚¢6W'fW"æÆöv–â…4ÕEõU4U"Â4ÕEõ52¢6W'fW"ç6VæFÖ–Â…4ÕEõU4U"ÂFõöVÖ–ÂÂ×6ræ5÷7G&–ær‚’¢6W'fW"çV—B‚¢&WGW&âG'VP¢W†6WBW†6WF–öâ2S ¢W'&÷'2æVæB†b'¶ÖWF†öGÓ¢·7G"†R—Ò"¢&—6RW†6WF–öâ‚"Â"æ¦ö–â†W'&÷'2’ ¦FVb6VæEöVÖ–Â‡FõöVÖ–ÂÂ7V&¦V7BÂ‡FÖÅö&öG’“ ¢""%&÷WFRFò6÷'&V7BVÖ–Â&÷f–FW""" ¢–bTÔ”Åõ$õd”DU"ÓÒ'&W6VæB"æB$U4TäEô•ô´U“ ¢&WGW&â6VæEöVÖ–Å÷&W6VæB‡FõöVÖ–ÂÂ7V&¦V7BÂ‡FÖÅö&öG’¢VÆ–bTÔ”Åõ$õd”DU"ÓÒ'6×G# ¢&WGW&â6VæEöVÖ–Å÷6×G‡FõöVÖ–ÂÂ7V&¦V7BÂ‡FÖÅö&öG’¢VÇ6S ¢&—6RW†6WF–öâ‚$æòVÖ–Â&÷f–FW"6öæf–wW&VBâ6WB$U4TäEô•ô´U’÷"TÔ”Åõ$õd”DU#×6×G" ¢2ÓÓÓÓÓÓÓÓÓÓÓÒ…DÔÂDTÕÄDRÓÓÓÓÓÓÓÓÓÓÓĞ¤D4„$ô$Eô…DÔÂÒ""#ÂDô5E•R‡FÖÃà£Æ‡FÖÂÆæsÒ&Vâ#à£Æ†VCà£ÆÖWF6†'6WCÒ%UDbÓ‚#ãÆÖWFæÖSÒ'f–Ww÷'B"6öçFVçCÒ'v–GFƒÖFWf–6R×v–GF‚Â–æ—F–Â×66ÆSÓã#à£ÇF—FÆSä&6—4’6ÆW2vVçCÂ÷F—FÆSà£Ç7G–ÆSà¢§¶Ö&v–ã£·FF–æs£¶&÷‚×6—¦–æs¦&÷&FW"Ö&÷‡Ğ¦&öG—¶föçBÖfÖ–Ç“¢ÖÆR×7—7FVÒÄ&Æ–æ´Ö57—7FVÔföçBÂu6VvöRT’rÅ&ö&÷FòÇ6ç2×6W&–c¶&6¶w&÷VæC¢6ccFcƒ¶6öÆ÷#¢3337Ğ¢æ†VFW'¶&6¶w&÷VæC¦Æ–æV"Öw&F–VçBƒ3VFVrÂ3S6†Â36#ƒ&cb“¶6öÆ÷#§v†—FS·FF–æs£#‚3ƒ¶F—7Æ“¦fÆWƒ¶§W7F–g’Ö6öçFVçC§76RÖ&WGvVVã¶Æ–vâÖ—FV×3¦6VçFW'Ğ¢æ†VFW"ƒ¶föçB×6—¦S£#G‡Òæ†VFW"7ç¶föçB×6—¦S£Gƒ¶÷6—G“£ã‡Ğ¢æ6öçF–æW'¶Ö‚×v–GFƒ£#ƒ¶Ö&v–ã£#‚WFó·FF–æs£#‡Ğ¢ç7FG7¶F—7Æ“¦w&–C¶w&–B×FV×ÆFRÖ6öÇVÖç3§&WVB†WFòÖf—BÆÖ–æÖ‚ƒƒ‚Ãg"’“¶v£Wƒ¶Ö&v–âÖ&÷GFöÓ£#W‡Ğ¢ç7FBÖ6&G¶&6¶w&÷VæC§v†—FS¶&÷&FW"×&F—W3£'ƒ·FF–æs£#ƒ¶&÷‚×6†F÷s£'‚‡‚&v&ƒÃÃÃã‚—Ğ¢ç7FBÖ6&Bƒ7¶föçB×6—¦S£Gƒ¶6öÆ÷#¢3ccc¶Ö&v–âÖ&÷GFöÓ£W‡Òç7FBÖ6&BæçV×¶föçB×6—¦S£3'ƒ¶föçB×vV–v‡C£s¶6öÆ÷#¢3S6†Ğ¢ç7FBÖ6&BæçVÒæw&VVç¶6öÆ÷#¢3f3FĞ¢æ6&G¶&6¶w&÷VæC§v†—FS¶&÷&FW"×&F—W3£'ƒ·FF–æs£#Wƒ¶&÷‚×6†F÷s£'‚‡‚&v&ƒÃÃÃã‚“¶Ö&v–âÖ&÷GFöÓ£#‡Ğ¢æ6&Bƒ'¶6öÆ÷#¢3S6†¶Ö&v–âÖ&÷GFöÓ£Wƒ¶föçB×6—¦S£#‡Ğ¢æf÷&ÒÖw&–G¶F—7Æ“¦w&–C¶w&–B×FV×ÆFRÖ6öÇVÖç3£g"g#¶v£W‡Ğ¦Æ&VÇ¶F—7Æ“¦&Æö6³¶föçB×6—¦S£Gƒ¶föçB×vV–v‡C£c¶6öÆ÷#¢3SSS¶Ö&v–âÖ&÷GFöÓ£W‡Ğ¦–çWBÇ6VÆV7BÇFW‡F&V·v–GFƒ£S·FF–æs£‚Gƒ¶&÷&FW#£'‚6öÆ–B6S&S†c¶&÷&FW"×&F—W3£‡ƒ¶föçB×6—¦S£Gƒ·G&ç6—F–öã¦&÷&FW"ã'7Ğ¦–çWC¦fö7W2Ç6VÆV7C¦fö7W2ÇFW‡F&V¦fö7W7¶÷WFÆ–æS¦æöæS¶&÷&FW"Ö6öÆ÷#¢36#ƒ&cgĞ§FW‡F&V¶w&–BÖ6öÇVÖã£òÓ¶†V–v‡C£ƒƒ·&W6—¦S§fW'F–6ÇĞ¢æ'Fç¶&6¶w&÷VæC¢3S6†¶6öÆ÷#§v†—FS¶&÷&FW#¦æöæS·FF–æs£'‚3ƒ¶&÷&FW"×&F—W3£‡ƒ¶föçB×6—¦S£gƒ¶föçB×vV–v‡C£c¶7W'6÷#§ö–çFW#·G&ç6—F–öã¦&6¶w&÷VæBã'7Ğ¢æ'Fã¦†÷fW'¶&6¶w&÷VæC¢3SCgÒæ'Fã¦F—6&ÆVG¶&6¶w&÷VæC¢3“F6#ƒ¶7W'6÷#¦æ÷BÖÆÆ÷vVGĞ¢æ'Fâ×&÷w¶w&–BÖ6öÇVÖã£òÓ·FW‡BÖÆ–vã§&–v‡C¶Ö&v–â×F÷£W‡Ğ¢æÆVG2×F&ÆW·v–GFƒ£S¶&÷&FW"Ö6öÆÆ6S¦6öÆÆ6S¶Ö&v–â×F÷£‡Ğ¢æÆVG2×F&ÆRF‡¶&6¶w&÷VæC¢6c†ff3·FF–æs£'ƒ·FW‡BÖÆ–vã¦ÆVgC¶föçB×6—¦S£7ƒ¶6öÆ÷#¢3ccc¶&÷&FW"Ö&÷GFöÓ£'‚6öÆ–B6S&S†cĞ¢æÆVG2×F&ÆRFG·FF–æs£'ƒ¶&÷&FW"Ö&÷GFöÓ£‚6öÆ–B6ccVc“¶föçB×6—¦S£G‡Ğ¢æ&FvW¶F—7Æ“¦–æÆ–æRÖ&Æö6³·FF–æs£7‚ƒ¶&÷&FW"×&F—W3£'ƒ¶föçB×6—¦S£'ƒ¶föçB×vV–v‡C£cĞ¢æ&FvR×6VçG¶&6¶w&÷VæC¢6F6f6Ss¶6öÆ÷#¢3ccS3GÒæ&FvRÖf–ÆVG¶&6¶w&÷VæC¢6fVc&c#¶6öÆ÷#¢3““#'Ğ¢æ&FvR×VæF–æw¶&6¶w&÷VæC¢6fVc–33¶6öÆ÷#¢3ƒSFCWÒæ&FvR×6¶—VG¶&6¶w&÷VæC¢6ccVc“¶6öÆ÷#¢3cCsC†'Ğ¢æ&FvRÖ†–v‡¶&6¶w&÷VæC¢6fVS&S#¶6öÆ÷#¢3““#'Òæ&FvRÖÖVF—V×¶&6¶w&÷VæC¢6fVc–33¶6öÆ÷#¢3ƒSFCWÒæ&FvRÖæ÷&ÖÇ¶&6¶w&÷VæC¢6Sc&fS¶6öÆ÷#¢3sS“ƒWĞ¢ç66÷&W¶föçB×vV–v‡C£s¶föçB×6—¦S£g‡Ğ¢ç66÷&RÖ†–v‡¶6öÆ÷#¢6F3#c#gÒç66÷&RÖÖVG¶6öÆ÷#¢6C“ssgÒç66÷&RÖÆ÷w¶6öÆ÷#¢3#Sc6V'Ğ¢æ×6w·FF–æs£'‚gƒ¶&÷&FW"×&F—W3£‡ƒ¶Ö&v–âÖ&÷GFöÓ£Wƒ¶F—7Æ“¦æöæWĞ¢æ×6rÖö·¶&6¶w&÷VæC¢6F6f6Ss¶6öÆ÷#¢3ccS3C¶F—7Æ“¦&Æö6·Òæ×6rÖW''¶&6¶w&÷VæC¢6fVc&c#¶6öÆ÷#¢3““##¶F—7Æ“¦&Æö6·Ğ¢çWÆöBÖ&V¶w&–BÖ6öÇVÖã£òÓ¶&÷&FW#£'‚F6†VB66&CVS¶&÷&FW"×&F—W3£‡ƒ·FF–æs£3‚#ƒ·FW‡BÖÆ–vã¦6VçFW#¶7W'6÷#§ö–çFW#·G&ç6—F–öã¦ÆÂã'3·÷6—F–öã§&VÆF—fWĞ¢çWÆöBÖ&V¦†÷fW'¶&÷&FW"Ö6öÆ÷#¢36#ƒ&cc¶&6¶w&÷VæC¢6ccvfgĞ¢çWÆöBÖ&VæG&rÖ÷fW'¶&÷&FW"Ö6öÆ÷#¢36#ƒ&cc¶&6¶w&÷VæC¢6F&VfS¶&÷&FW"×v–GFƒ£7‡Ğ¢çWÆöBÖ&V–çWG¶F—7Æ“¦æöæWĞ¢æ6†ææVÂÖ&FvW7¶F—7Æ“¦fÆWƒ¶v£Gƒ¶fÆW‚×w&§w&Ğ¤ÖVF–†Ö‚×v–GFƒ£sc‡‚—²æf÷&ÒÖw&–G¶w&–B×FV×ÆFRÖ6öÇVÖç3£g'Òç7FG7¶w&–B×FV×ÆFRÖ6öÇVÖç3£g"g'×Ğ£Â÷7G–ÆSà£Âö†VCà£Æ&öG“à£ÆF—b6Æ73Ò&†VFW"#à¢Æƒä&6—4’6ÆW2vVçCÂöƒà¢Ç7ãä’Õ÷vW&VBÆVBÖævVÖVçCÂ÷7ãà£ÂöF—cà£ÆF—b6Æ73Ò&6öçF–æW"#à¢ÆF—b6Æ73Ò'7FG2"–CÒ'7FG2#à¢ÆF—b6Æ73Ò'7FBÖ6&B#ãÆƒ3åF÷FÂÆVG3Âöƒ3ãÆF—b6Æ73Ò&çVÒ"–CÒ'2×F÷FÂ#ãÂöF—cãÂöF—cà¢ÆF—b6Æ73Ò'7FBÖ6&B#ãÆƒ3äVÖ–Ç26VçCÂöƒ3ãÆF—b6Æ73Ò&çVÒ"–CÒ'2×6VçB#ãÂöF—cãÂöF—cà¢ÆF—b6Æ73Ò'7FBÖ6&B#ãÆƒ3åv†G46VçCÂöƒ3ãÆF—b6Æ73Ò&çVÒw&VVâ"–CÒ'2×v#ãÂöF—cãÂöF—cà¢ÆF—b6Æ73Ò'7FBÖ6&B#ãÆƒ3äfr66÷&SÂöƒ3ãÆF—b6Æ73Ò&çVÒ"–CÒ'2×66÷&R#ãÂöF—cãÂöF—cà¢ÆF—b6Æ73Ò'7FBÖ6&B#ãÆƒ3åFöF“Âöƒ3ãÆF—b6Æ73Ò&çVÒ"–CÒ'2×FöF’#ãÂöF—cãÂöF—cà¢ÂöF—cà ¢ÆF—b6Æ73Ò&6&B#à¢Æƒ#äFBæWrÆVCÂöƒ#à¢ÆF—b–CÒ&×6r#ãÂöF—cà¢Æf÷&Ò–CÒ&ÆVDf÷&Ò"6Æ73Ò&f÷&ÒÖw&–B#à¢ÆF—cãÆÆ&VÃägVÆÂæÖR£ÂöÆ&VÃãÆ–çWBæÖSÒ&æÖR"&WV—&VBÆ6V†öÆFW#Ò&Rærâ&¦W6‚·VÖ"#ãÂöF—cà¢ÆF—cãÆÆ&VÃäVÖ–Â£ÂöÆ&VÃãÆ–çWBæÖSÒ&VÖ–Â"G—SÒ&VÖ–Â"&WV—&VBÆ6V†öÆFW#Ò&Rærâ&¦W6„6ö×ç’æ6öÒ#ãÂöF—cà¢ÆF—cãÆÆ&VÃä6ö×ç“ÂöÆ&VÃãÆ–çWBæÖSÒ&6ö×ç’"Æ6V†öÆFW#Ò&Rærâ$2–æGW7G&–W2#ãÂöF—cà¢ÆF—cãÆÆ&VÃå†öæR†f÷"v†G4“ÂöÆ&VÃãÆ–çWBæÖSÒ'†öæR"Æ6V†öÆFW#Ò&Rærâ³““ƒscRC3##ãÂöF—cà¢ÆF—cãÆÆ&VÃä7W7FöÖW"G—SÂöÆ&VÃà¢Ç6VÆV7BæÖSÒ&7W7FöÖW%÷G—R#à¢Æ÷F–öâfÇVSÒ"#å6VÆV7BââãÂö÷F–öãà¢Æ÷F–öâfÇVSÒ&v÷fW&æÖVçB#äv÷fW&æÖVçBò5SÂö÷F–öãà¢Æ÷F–öâfÇVSÒ&VçFW'&—6R#äVçFW'&—6Rò6÷'÷&FSÂö÷F–öãà¢Æ÷F–öâfÇVSÒ'6’#å7—7FVÒ–çFVw&F÷#Âö÷F–öãà¢Æ÷F–öâfÇVSÒ&FVÆW"#äFVÆW"òF—7G&–'WF÷#Âö÷F–öãà¢Æ÷F–öâfÇVSÒ'&W6–FVçF–Â#å&W6–FVçF–ÃÂö÷F–öãà¢Æ÷F–öâfÇVSÒ&÷F†W"#ä÷F†W#Âö÷F–öãà¢Â÷6VÆV7Cà¢ÂöF—cà¢ÆF—cãÆÆ&VÃåVçF—G“ÂöÆ&VÃãÆ–çWBæÖSÒ'VçF—G’"Æ6V†öÆFW#Ò&RærâS6ÖW&2#ãÂöF—cà¢ÇFW‡F&VæÖSÒ'&WV—&VÖVçB"Æ6V†öÆFW#Ò$FW67&–&Rv†BF†W’æVVBâââRærâS'VÆÆWB6ÖW&2f÷"v&V†÷W6R7W'fV–ÆÆæ6Rv—F‚æ–v‡Bf—6–öâ#ãÂ÷FW‡F&Và¢ÆF—b6Æ73Ò&'Fâ×&÷r#ãÆ'WGFöâG—SÒ'7V&Ö—B"6Æ73Ò&'Fâ"–CÒ'7V&Ö—D'Fâ#å6VæBVÖ–Â²v†G4b6fRÆVCÂö'WGFöããÂöF—cà¢Âöf÷&Óà¢ÂöF—cà ¢ÆF—b6Æ73Ò&6&B#à¢Æƒ#åWÆöB55böbÆVG2(	BWFòVÖ–Â²v†G4Âöƒ#à¢Ç7G–ÆSÒ&6öÆ÷#¢3ccc¶föçB×6—¦S£Gƒ¶Ö&v–âÖ&÷GFöÓ£‚#åWÆöB–÷W"F–Ç’–æ&÷VæBÆVG255bâF†R’vVçBv–ÆÂÇ7G&öæsæWFöÖF–6ÆÇ’6VæBW'6öæÆ—¦VBVÖ–Ç2äBv†G4ÖW76vW3Â÷7G&öæsâFòWfW'’ÆVBãÂ÷à¢Ç7G–ÆSÒ&6öÆ÷#¢3ƒƒƒ¶föçB×6—¦S£7ƒ¶Ö&v–âÖ&÷GFöÓ£'‚#ä55bf÷&ÖC¢Æ6öFR7G–ÆSÒ&&6¶w&÷VæC¢6ccVc“·FF–æs£'‚gƒ¶&÷&FW"×&F—W3£G‚#ææÖRÂVÖ–ÂÂ6ö×ç’Â†öæRÂ&WV—&VÖVçBÂ7W7FöÖW%÷G—SÂö6öFSà¢fæ'7²Æ‡&VcÒ"2"öæ6Æ–6³Ò&F÷væÆöE6×ÆT55b‚“·&WGW&âfÇ6R"7G–ÆSÒ&6öÆ÷#¢36#ƒ&cc¶föçB×6—¦S£7‚#äF÷væÆöB6×ÆR55cÂöãÂ÷à¢ÆF—b6Æ73Ò'WÆöBÖ&V"–CÒ'WÆöD&V"öæ6Æ–6³Ò&Fö7VÖVçBævWDVÆVÖVçD'”–B‚v77df–ÆRr’æ6Æ–6²‚’ ¢öæG&v÷fW#Ò&WfVçBç&WfVçDFVfVÇB‚“¶WfVçBç7F÷&÷vF–öâ‚“·F†—2æ6Æ74Æ—7BæFB‚vG&rÖ÷fW"r’ ¢öæG&vÆVfSÒ&WfVçBç&WfVçDFVfVÇB‚“¶WfVçBç7F÷&÷vF–öâ‚“·F†—2æ6Æ74Æ—7Bç&VÖ÷fR‚vG&rÖ÷fW"r’ ¢öæG&÷Ò&WfVçBç&WfVçDFVfVÇB‚“¶WfVçBç7F÷&÷vF–öâ‚“·F†—2æ6Æ74Æ—7Bç&VÖ÷fR‚vG&rÖ÷fW"r“¶†æFÆTG&÷†WfVçB’#à¢Æ–çWBG—SÒ&f–ÆR"–CÒ&77df–ÆR"66WCÒ"æ77b"öæ6†ævSÒ'WÆöD55b‡F†—2’#à¢ÆF—b7G–ÆSÒ&föçB×6—¦S£3gƒ¶Ö&v–âÖ&÷GFöÓ£‡‚#ï	ù8CÂöF—cà¢Ç7G–ÆSÒ&6öÆ÷#¢3CCC¶föçB×vV–v‡C£c¶föçB×6—¦S£W‚"–CÒ'WÆöDÆ&VÂ#ä6Æ–6²†W&R÷"G&rbG&÷–÷W"55bf–ÆSÂ÷à¢Ç7G–ÆSÒ&6öÆ÷#¢3ƒƒƒ¶föçB×6—¦S£'ƒ¶Ö&v–â×F÷£G‚#ä66WG2æ77bf–ÆW2öæÇ“Â÷à¢ÂöF—cà¢ÆF—b–CÒ&77e&öw&W72"7G–ÆSÒ&F—7Æ“¦æöæS¶Ö&v–â×F÷£W‚#à¢ÆF—b7G–ÆSÒ&F—7Æ“¦fÆWƒ¶§W7F–g’Ö6öçFVçC§76RÖ&WGvVVã¶Ö&v–âÖ&÷GFöÓ£g‚#à¢Ç7â–CÒ&77e&öw&W75FW‡B"7G–ÆSÒ&föçB×6—¦S£Gƒ¶föçB×vV–v‡C£c¶6öÆ÷#¢3S6†#å&ö6W76–ærââãÂ÷7ãà¢Ç7â–CÒ&77e&öw&W746÷VçB"7G–ÆSÒ&föçB×6—¦S£Gƒ¶6öÆ÷#¢3ccb#ãòÂ÷7ãà¢ÂöF—cà¢ÆF—b7G–ÆSÒ&&6¶w&÷VæC¢6S&S†c¶&÷&FW"×&F—W3£‡ƒ¶†V–v‡C£'ƒ¶÷fW&fÆ÷s¦†–FFVâ#à¢ÆF—b–CÒ&77d&""7G–ÆSÒ&&6¶w&÷VæC¦Æ–æV"Öw&F–VçBƒ“FVrÂ36#ƒ&cbÂ3S6†“¶†V–v‡C£S¶&÷&FW"×&F—W3£‡ƒ·v–GFƒ£S·G&ç6—F–öã§v–GF‚ã72#ãÂöF—cà¢ÂöF—cà¢ÂöF—cà¢ÆF—b–CÒ&77e&W7VÇG2"7G–ÆSÒ&F—7Æ“¦æöæS¶Ö&v–â×F÷£W‚#à¢ÆF—b7G–ÆSÒ&F—7Æ“¦w&–C¶w&–B×FV×ÆFRÖ6öÇVÖç3§&WVBƒBÃg"“¶v£ƒ¶Ö&v–âÖ&÷GFöÓ£'‚#à¢ÆF—b7G–ÆSÒ&&6¶w&÷VæC¢6F6f6Ss¶&÷&FW"×&F—W3£‡ƒ·FF–æs£ƒ·FW‡BÖÆ–vã¦6VçFW"#ãÆF—b7G–ÆSÒ&föçB×6—¦S£#ƒ¶föçB×vV–v‡C£s¶6öÆ÷#¢3ccS3B"–CÒ&77dVÖ–Ç2#ãÂöF—cãÆF—b7G–ÆSÒ&föçB×6—¦S£'ƒ¶6öÆ÷#¢3ccS3B#äVÖ–Ç26VçCÂöF—cãÂöF—cà¢ÆF—b7G–ÆSÒ&&6¶w&÷VæC¢6F6f6Ss¶&÷&FW"×&F—W3£‡ƒ·FF–æs£ƒ·FW‡BÖÆ–vã¦6VçFW"#ãÆF—b7G–ÆSÒ&föçB×6—¦S£#ƒ¶föçB×vV–v‡C£s¶6öÆ÷#¢3ccS3B"–CÒ&77et#ãÂöF—cãÆF—b7G–ÆSÒ&föçB×6—¦S£'ƒ¶6öÆ÷#¢3ccS3B#åv†G46VçCÂöF—cãÂöF—cà¢ÆF—b7G–ÆSÒ&&6¶w&÷VæC¢6fVc&c#¶&÷&FW"×&F—W3£‡ƒ·FF–æs£ƒ·FW‡BÖÆ–vã¦6VçFW"#ãÆF—b7G–ÆSÒ&föçB×6—¦S£#ƒ¶föçB×vV–v‡C£s¶6öÆ÷#¢3““#""–CÒ&77df–ÆVB#ãÂöF—cãÆF—b7G–ÆSÒ&föçB×6—¦S£'ƒ¶6öÆ÷#¢3““#"#äf–ÆVCÂöF—cãÂöF—cà¢ÆF—b7G–ÆSÒ&&6¶w&÷VæC¢6ccFcƒ¶&÷&FW"×&F—W3£‡ƒ·FF–æs£ƒ·FW‡BÖÆ–vã¦6VçFW"#ãÆF—b7G–ÆSÒ&föçB×6—¦S£#ƒ¶föçB×vV–v‡C£s¶6öÆ÷#¢3S6†"–CÒ&77eF÷FÂ#ãÂöF—cãÆF—b7G–ÆSÒ&föçB×6—¦S£'ƒ¶6öÆ÷#¢3S6†#åF÷FÂ&÷w3ÂöF—cãÂöF—cà¢ÂöF—cà¢ÇF&ÆR6Æ73Ò&ÆVG2×F&ÆR"–CÒ&77e&W7VÇG5F&ÆR"7G–ÆSÒ&F—7Æ“¦æöæR#à¢ÇF†VCãÇG#ãÇFƒäæÖSÂ÷FƒãÇFƒäVÖ–ÃÂ÷FƒãÇFƒå†öæSÂ÷FƒãÇFƒäVÖ–Â7FGW3Â÷FƒãÇFƒåv†G47FGW3Â÷FƒãÇFƒå66÷&SÂ÷FƒãÂ÷G#ãÂ÷F†VCà¢ÇF&öG’–CÒ&77e&W7VÇG4&öG’#ãÂ÷F&öG“à¢Â÷F&ÆSà¢ÆF—b7G–ÆSÒ'FW‡BÖÆ–vã¦6VçFW#¶Ö&v–â×F÷£‚#ãÆ‡&VcÒ"2"öæ6Æ–6³Ò&Fö7VÖVçBævWDVÆVÖVçD'”–B‚v77e&W7VÇG5F&ÆRr’ç7G–ÆRæF—7Æ“ÖFö7VÖVçBævWDVÆVÖVçD'”–B‚v77e&W7VÇG5F&ÆRr’ç7G–ÆRæF—7Æ“ÓÓÒvæöæRsòwF&ÆRs¢væöæRs·&WGW&âfÇ6R"7G–ÆSÒ&6öÆ÷#¢36#ƒ&cc¶föçB×6—¦S£7‚#åFövvÆR&÷rFWF–Ç3ÂöãÂöF—cà¢ÂöF—cà¢ÂöF—cà ¢ÆF—b6Æ73Ò&6&B#à¢Æƒ#å&V6VçBÆVG3Âöƒ#à¢ÇF&ÆR6Æ73Ò&ÆVG2×F&ÆR#à¢ÇF†VCãÇG#ãÇFƒäæÖSÂ÷FƒãÇFƒäVÖ–ÃÂ÷FƒãÇFƒä6ö×ç“Â÷FƒãÇFƒå66÷&SÂ÷FƒãÇFƒå&–÷&—G“Â÷FƒãÇFƒä6†ææVÇ3Â÷FƒãÇFƒäFFSÂ÷FƒãÂ÷G#ãÂ÷F†VCà¢ÇF&öG’–CÒ&ÆVG4&öG’#ãÂ÷F&öG“à¢Â÷F&ÆSà¢ÂöF—cà£ÂöF—cà £Ç67&—Cà¦6öç7B’Òrs°¦gVæ7F–öâ6†÷t×6r‡FW‡BÂö²’°¢6öç7BÒÒFö7VÖVçBævWDVÆVÖVçD'”–B‚v×6rr“°¢ÒçFW‡D6öçFVçBÒFW‡C²Òæ6Æ74æÖRÒv×6rr²†ö²òv×6rÖö²r¢v×6rÖW'"r“°¢6WEF–ÖV÷WB‚‚’ÓâÒæ6Æ74æÖRÒv×6rrÂc“°§Ğ¦Fö7VÖVçBævWDVÆVÖVçD'”–B‚vÆVDf÷&Òr’æöç7V&Ö—BÒ7–æ2†R’Óâ°¢Rç&WfVçDFVfVÇB‚“°¢6öç7B'FâÒFö7VÖVçBævWDVÆVÖVçD'”–B‚w7V&Ö—D'Fâr“°¢'FâæF—6&ÆVBÒG'VS²'FâçFW‡D6öçFVçBÒu6VæF–ærâââs°¢6öç7BfBÒæWrf÷&ÔFF†RçF&vWB“°¢6öç7BFFÒö&¦V7Bæg&öÔVçG&–W2†fB“°¢G'’°¢6öç7B"Òv—BfWF6‚„’²rö’öÆVBrÂ¶ÖWF†öC¢uõ5BrÂ†VFW'3¢²t6öçFVçBÕG—Rs¢vÆ–6F–öâö§6öâwÒÂ&öG“¢¥4ôâç7G&–æv–g’†FF—Ò“°¢6öç7B¢Òv—B"æ§6öâ‚“°¢–b†¢ç7V66W72’°¢ÆWB×6rÒtÆVB6fVBVÖ–Ã¢r²†¢æÆVBæVÖ–Å÷7FGW2ÇÂsòr“°¢–b†¢æÆVBçv†G6÷7FGW2’×6r³ÒrÂv†G4¢r²¢æÆVBçv†G6÷7FGW3°¢6†÷t×6r†×6rÂG'VR“°¢RçF&vWBç&W6WB‚“²ÆöDÆVG2‚“°¢ÒVÇ6R6†÷t×6r‚tW'&÷#¢r²†¢æW'&÷"ÇÂuVæ¶æ÷vâr’ÂfÇ6R“°¢Ò6F6‚†W'"’²6†÷t×6r‚tæWGv÷&²W'&÷#¢r²W'"æÖW76vRÂfÇ6R“²Ğ¢'FâæF—6&ÆVBÒfÇ6S²'FâçFW‡D6öçFVçBÒu6VæBVÖ–Â²v†G4b6fRÆVBs°§Ó°¦gVæ7F–öâF÷væÆöE6×ÆT55b‚’°¢6öç7B77bÒvæÖRÆVÖ–ÂÆ6ö×ç’Ç†öæRÇ&WV—&VÖVçBÆ7W7FöÖW%÷G—UÅÆå&¦W6‚·VÖ"Ç&¦W6„FV6‡6öÂæ–âÅFV6…6öÂ–æGW7G&–W2Â³““ƒscSC3#ÃS'VÆÆWB6ÖW&2f÷"v&V†÷W6Rv—F‚æ–v‡Bf—6–öâÇ6•ÅÆå&—–ÖV‡FÇ&—–v÷g&ö¦V7Bæ–âÄwV¦&B6Ö'B6—G’Â³““#3CScsƒ’Ã#å"6ÖW&2f÷"†–v‡v’Ööæ—F÷&–ærÆv÷fW&æÖVçEÅÆäÖ—B6†‚ÆÖ—D6V7W&VæWBæ6öÒÅ6V7W&TæWBFVÆW'2Â³““SSS#3CSbÄÆöö¶–ærFò&V6öÖR&6—4’FVÆW"–â&¦7F†âÆFVÆW%ÅÆå6æV†FVÂÇ6æV†VçFW'&—6Ræ6òÄVçFW'&—6R6÷ <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
+
+def build_email_html(first_name, company, requirement, score, customer_type=""):
+    """Build personalized email using PAS framework (Problem-Agitate-Solve) for Indian CCTV market"""
+    ct = (customer_type or "").lower()
+    wa_link = "https://wa.me/919687779999"
+    req_display = requirement or "security cameras"
+    priority = "HIGH PRIORITY" if score >= 75 else "MEDIUM" if score >= 50 else "NORMAL"
+    co = f" for {company}" if company and company.lower() not in ["na", "none", "", "n/a"] else ""
+    co_short = company if company and company.lower() not in ["na", "none", "", "n/a"] else ""
+
+    # Subject line - feels like a real person replied
+    if ct == "si":
+        subject = f"{first_name}, quick question about your {req_display[:40]} project"
+    elif ct == "dealer":
+        subject = f"ArcisAI dealership \u2014 40%+ margins, territory open"
+    elif ct == "government":
+        subject = f"Re: STQC certified AI cameras \u2014 {co_short or 'Govt project'}"
+    elif ct == "enterprise":
+        subject = f"{first_name}, re: {req_display[:40]} at {co_short or 'your facility'}"
+    else:
+        if co_short:
+            subject = f"Re: {co_short} \u2014 camera requirement"
+        else:
+            subject = f"{first_name}, quick note on your camera inquiry"
+
+    # PAS Framework: Problem > Agitate > Solve per customer type
+    if ct == "si":
+        p1 = f"Got your inquiry for {req_display}{co}. Quick question \u2014 are you finding it hard to offer AI analytics in your CCTV projects? Most SIs we speak with say clients are demanding AI features, but after the Chinese camera restrictions, finding a compliant + capable brand is a real challenge."
+        p2 = f"We\u2019ve seen SI partners lose \u20b950L+ projects simply because they couldn\u2019t provide STQC-certified AI cameras with non-Chinese SoC. That\u2019s a gap ArcisAI fills."
+        p3 = f"<strong>Here\u2019s what\u2019s working for our 200+ SI partners:</strong><br/>\u2022 S-Series: 8 on-camera AI features (PPE, Fire, ANPR, Intrusion, Crowd) \u2014 no separate analytics server needed<br/>\u2022 STQC + BIS + ISO 27001 certified, GeM listed<br/>\u2022 Competitive project pricing with dedicated SI margins<br/>\u2022 Full pre-sales support: BOQ, technical specs, compliance docs"
+        cta = "I\u2019ll WhatsApp you the SI price list + project margin calculator right now. Or pick a time for a 10-min call \u2014 I\u2019ll walk you through how other SIs are winning projects with ArcisAI."
+    elif ct == "dealer":
+        p1 = f"Thanks for your interest in ArcisAI{co}. Quick question \u2014 how are your margins looking on your current camera brands? Most dealers tell us the same story: margins on imported brands are getting thinner every quarter."
+        p2 = f"And with the government\u2019s non-Chinese mandate expanding to more states, dealers who are still primarily stocking those brands are sitting on risk. We\u2019ve seen it happen \u2014 bans come overnight, stock becomes unsellable."
+        p3 = f"<strong>ArcisAI dealer program is built for this market:</strong><br/>\u2022 40%+ dealer margins (yes, really)<br/>\u2022 Eco-Series from \u20b93,500/camera \u2014 best-seller for homes and shops<br/>\u2022 S-Series with AI from \u20b98,500 \u2014 premium segment with zero competition<br/>\u2022 Made in India, STQC certified \u2014 future-proof against any ban<br/>\u2022 Free marketing kit + demo cameras for serious partners"
+        cta = "We\u2019re onboarding only 3-4 dealers per city to protect your territory. Want me to send the dealer price list and MOQ details on WhatsApp?"
+    elif ct == "government":
+        p1 = f"Thank you for your inquiry regarding {req_display}{co}. Given the current compliance requirements for government CCTV procurement, I wanted to reach out directly."
+        p2 = f"After the MHA\u2019s advisory on Chinese-origin cameras, several government projects have faced delays because vendors couldn\u2019t provide proper STQC certification or non-Chinese SoC documentation. We\u2019ve helped multiple departments navigate this smoothly."
+        p3 = f"<strong>ArcisAI is fully procurement-ready:</strong><br/>\u2022 STQC Certified (certificate available immediately)<br/>\u2022 Listed on GeM with active Cat ID<br/>\u2022 Non-Chinese SoC \u2014 100% Made in India<br/>\u2022 BIS, ISO 27001, CE, FCC compliant<br/>\u2022 8 Edge AI features: ANPR, Face Detection, Intrusion, Fire, PPE, Crowd Analytics, Tripwire, Loitering<br/>\u2022 Deployed across Smart City, Police, Defence, and PSU projects"
+        cta = "I can share the complete compliance documentation package (STQC certificate, GeM listing, BIS certificate, technical datasheet) right away. Shall I send on WhatsApp for quick access, or email works?"
+    elif ct == "enterprise":
+        p1 = f"Saw your requirement for {req_display}{co} \u2014 this is exactly what we specialize in."
+        p2 = f"Most enterprises we work with were either paying lakhs monthly for cloud-based video analytics that\u2019s slow and raises data privacy concerns, or using basic cameras with zero intelligence. Both cost money \u2014 one through bills, the other through incidents that could have been prevented."
+        p3 = f"<strong>ArcisAI\u2019s edge AI changes this completely:</strong><br/>\u2022 All AI processing happens on-camera \u2014 <500ms alerts, zero cloud cost, 100% data stays on-premise<br/>\u2022 8 detection types: intrusion, fire, PPE, ANPR, crowd, face, tripwire, loitering<br/>\u2022 Scales from 10 to 1000+ cameras with centralized management<br/>\u2022 500+ enterprise deployments across India (manufacturing, warehouses, hospitals, campuses)"
+        cta = f"I\u2019d love to show you a 15-min live demo customized for {co_short or 'your use case'}. You\u2019ll see the AI detections working in real-time. What day works this week?"
+    elif ct == "residential":
+        p1 = f"Thanks for your interest in ArcisAI cameras{co}!"
+        p2 = f"If you\u2019re looking at security cameras for your home or shop, you\u2019ve probably seen two extremes \u2014 cheap \u20b9800 cameras that die in 3 months, or imported brands charging \u20b915,000+ per camera. Neither makes sense."
+        p3 = f"<strong>Our Eco-Series hits the sweet spot:</strong><br/>\u2022 AI-powered cameras starting at \u20b93,500<br/>\u2022 Smart alerts on your phone (person detection, not just motion)<br/>\u2022 Crystal clear night vision up to 30 meters<br/>\u2022 Easy mobile app \u2014 watch live from anywhere<br/>\u2022 Plug-and-play setup, no technician needed for basic install<br/>\u2022 Made in India with 2-year warranty"
+        cta = "How many cameras are you thinking? Tell me the area you want to cover and I\u2019ll suggest the best package with pricing on WhatsApp."
+    else:
+        p1 = f"Got your inquiry about {req_display}{co} \u2014 thanks for considering ArcisAI."
+        p2 = f"Whether you need 4 cameras or 1000+, the challenge is the same \u2014 finding cameras that are reliable, intelligent, and compliant. Most brands either lack AI features or come with compliance baggage."
+        p3 = f"<strong>ArcisAI solves this:</strong><br/>\u2022 India\u2019s most advanced Edge AI cameras \u2014 8 detection types processed on-camera<br/>\u2022 S-Series (premium, from \u20b98,500) and Eco-Series (value, from \u20b93,500)<br/>\u2022 STQC + BIS + ISO 27001 certified, Made in India<br/>\u2022 4-camera home setups to 1000+ camera enterprise deployments"
+        cta = "I\u2019d love to understand your requirement better. Quick 5-min call, or shall I send a product comparison on WhatsApp?"
+
+    html = f"""<html>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #333; margin: 0; padding: 0;">
+<div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+    <p style="font-size: 15px;">Hi {first_name},</p>
+    <p style="font-size: 15px;">{p1}</p>
+    <p style="font-size: 15px;">{p2}</p>
+    <p style="font-size: 14px;">{p3}</p>
+    <p style="font-size: 15px;">{cta}</p>
+    <div style="margin: 25px 0;">
+        <a href="{wa_link}" style="background: #25D366; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-size: 15px;">\U0001f4f1 WhatsApp Us Directly</a>
+        <span style="color: #888; font-size: 13px; margin-left: 10px;">or call +91 96877 79999</span>
+    </div>
+    <p style="margin: 0; font-size: 14px;">Best regards,</p>
+    <p style="margin: 4px 0; font-size: 14px;"><strong>Kushal | ArcisAI Sales</strong></p>
+    <p style="margin: 2px 0; color: #888; font-size: 13px;">arcisai.io | +91 96877 79999</p>
+</div>
+</body>
+</html>"""
+    return subject, html, priority
+
+# ============ WHATSAPP MESSAGE BUILDER ============
+def build_whatsapp_message(first_name, company, requirement, customer_type=""):
+    """Build short, conversational WhatsApp message for Indian B2B market - max 4-5 lines"""
+    ct = (customer_type or "").lower()
+    req_short = (requirement or "security cameras")[:60]
+    co = f" ({company})" if company and company.lower() not in ["na", "none", "", "n/a"] else ""
+
+    if ct == "si":
+        msg = f"""Hi {first_name} ji{co} \U0001f44b
+
+Got your inquiry for {req_short}.
+
+ArcisAI = STQC certified + 8 AI features on-camera + non-Chinese SoC. 200+ SI partners across India already.
+
+Shall I send the *SI price list + margin details* right here on WhatsApp? \U0001f4cb
+
+\u2014 Kushal, ArcisAI | arcisai.io"""
+    elif ct == "dealer":
+        msg = f"""Hi {first_name} ji{co} \U0001f44b
+
+ArcisAI dealer program:
+\u2022 *40%+ margins* (Eco-Series from \u20b93,500, S-Series from \u20b98,500)
+\u2022 Made in India, STQC certified
+\u2022 Marketing kit + demo units included
+
+We\u2019re onboarding *limited dealers per city*. Interested in the price list? \U0001f4ca
+
+\u2014 Kushal, ArcisAI | arcisai.io"""
+    elif ct == "government":
+        msg = f"""Hi {first_name} ji{co} \U0001f44b
+
+Re: {req_short}
+
+ArcisAI is *STQC Certified + GeM Listed + Non-Chinese SoC + BIS + ISO 27001*. Fully compliant for govt procurement.
+
+Can share all compliance docs (STQC cert, GeM details, datasheets) right here. Need them? \U0001f4c4
+
+\u2014 Kushal, ArcisAI | arcisai.io"""
+    elif ct == "enterprise":
+        msg = f"""Hi {first_name} ji{co} \U0001f44b
+
+Saw your requirement \u2014 {req_short}.
+
+ArcisAI = *Edge AI on-camera, <500ms alerts, zero cloud cost*. 500+ sites deployed across India.
+
+Can I show you a quick 15-min demo customized for your setup? \U0001f3af
+
+\u2014 Kushal, ArcisAI | arcisai.io"""
+    elif ct == "residential":
+        msg = f"""Hi {first_name}{co} \U0001f44b
+
+Thanks for your interest! Our Eco-Series AI cameras start at just *\u20b93,500* \u2014 smart alerts, night vision, mobile app access.
+
+How many cameras do you need? I\u2019ll send you the best package with pricing \U0001f4f1
+
+\u2014 Kushal, ArcisAI | arcisai.io"""
+    else:
+        msg = f"""Hi {first_name} ji{co} \U0001f44b
+
+Got your inquiry about {req_short}. ArcisAI offers India\u2019s most advanced AI cameras \u2014 STQC certified, Made in India, edge AI processing.
+
+Can I send you a product comparison + pricing on WhatsApp? \U0001f4cb
+
+\u2014 Kushal, ArcisAI | arcisai.io"""
+
+    return msg
+
+# ============ WHATSAPP SENDER (Twilio REST API) ============
+def format_phone_for_whatsapp(phone):
+    """Format phone number for WhatsApp (E.164 format)"""
+    if not phone:
+        return None
+    # Remove spaces, dashes, dots, parentheses
+    cleaned = phone.strip().replace(" ", "").replace("-", "").replace(".", "").replace("(", "").replace(")", "")
+    # Remove leading + if present (we'll add it back)
+    if cleaned.startswith("+"):
+        cleaned = cleaned[1:]
+    # If starts with 91 and is 12 digits, it's Indian
+    if cleaned.startswith("91") and len(cleaned) == 12:
+        return f"+{cleaned}"
+    # If 10 digits, assume Indian number
+    if len(cleaned) == 10 and cleaned[0] in "6789":
+        return f"+91{cleaned}"
+    # If already has country code (11+ digits)
+    if len(cleaned) >= 11:
+        return f"+{cleaned}"
+    return None
+
+def send_whatsapp_twilio(to_phone, message_body):
+    """Send WhatsApp message via Twilio REST API using urllib (no external library needed)"""
+    if not TWILIO_ACCOUNT_SID or not TWILIO_AUTH_TOKEN:
+        raise Exception("Twilio credentials not configured")
+
+    formatted_phone = format_phone_for_whatsapp(to_phone)
+    if not formatted_phone:
+        raise Exception(f"Invalid phone number: {to_phone}")
+
+    # Twilio Messages API endpoint
+    url = f"https://api.twilio.com/2010-04-01/Accounts/{TWILIO_ACCOUNT_SID}/Messages.json"
+
+    # Basic auth: base64(SID:AuthToken)
+    auth_str = base64.b64encode(f"{TWILIO_ACCOUNT_SID}:{TWILIO_AUTH_TOKEN}".encode()).decode()
+
+    # Form-encoded body (Twilio uses application/x-www-form-urlencoded)
+    payload = urllib.parse.urlencode({
+        "From": f"whatsapp:{TWILIO_WHATSAPP_FROM}",
+        "To": f"whatsapp:{formatted_phone}",
+        "Body": message_body
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={
+            "Authorization": f"Basic {auth_str}",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": "ArcisAI-SalesAgent/1.0"
+        },
+        method="POST"
+    )
+
+    try:
+        resp = urllib.request.urlopen(req, timeout=15)
+        result = json.loads(resp.read().decode())
+        sid = result.get("sid", "")
+        status = result.get("status", "")
+        return True, f"sent (sid: {sid}, status: {status})"
+    except urllib.error.HTTPError as e:
+        body = e.read().decode()
+        raise Exception(f"Twilio API error {e.code}: {body}")
+
+# ============ EMAIL SENDERS ============
+def send_email_resend(to_email, subject, html_body):
+    """Send email via Resend HTTP API (works on Render free tier)"""
+    if not RESEND_API_KEY:
+        raise Exception("RESEND_API_KEY not configured")
+    payload = json.dumps({
+        "from": f"{FROM_NAME} <onboarding@resend.dev>",
+        "to": [to_email],
+        "subject": subject,
+        "html": html_body,
+        "reply_to": SMTP_USER
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {RESEND_API_KEY}",
+            "Content-Type": "application/json",
+            "User-Agent": "ArcisAI-SalesAgent/1.0"
+        },
+        method="POST"
+    )
+    try:
+        resp = urllib.request.urlopen(req, timeout=10)
+        result = json.loads(resp.read().decode())
+        return True
+    except urllib.error.HTTPError as e:
+        body = e.read().decode()
+        raise Exception(f"Resend API error {e.code}: {body}")
+
+def send_email_smtp(to_email, subject, html_body):
+    """Send email via SMTP (for servers that allow outbound SMTP)"""
+    msg = MIMEMultipart("alternative")
+    msg["From"] = f"{FROM_NAME} <{SMTP_USER}>"
+    msg["To"] = to_email
+    msg["Subject"] = subject
+    msg["Reply-To"] = SMTP_USER
+    msg.attach(MIMEText(html_body, "html"))
+    errors = []
+    for method in ["ssl", "tls"]:
+        try:
+            if method == "ssl":
+                server = smtplib.SMTP_SSL(SMTP_HOST, 465, timeout=8)
+            else:
+                server = smtplib.SMTP(SMTP_HOST, 587, timeout=8)
+                server.starttls()
+            server.login(SMTP_USER, SMTP_PASS)
+            server.sendmail(SMTP_USER, to_email, msg.as_string())
+            server.quit()
+            return True
+        except Exception as e:
+            errors.append(f"{method}: {str(e)}")
+    raise Exception(" | ".join(errors))
+
+def send_email(to_email, subject, html_body):
+    """Route to correct email provider"""
+    if EMAIL_PROVIDER == "resend" and RESEND_API_KEY:
+        return send_email_resend(to_email, subject, html_body)
+    elif EMAIL_PROVIDER == "smtp":
+        return send_email_smtp(to_email, subject, html_body)
+    else:
+        raise Exception("No email provider configured. Set RESEND_API_KEY or EMAIL_PROVIDER=smtp")
+
+# ============ HTML TEMPLATE ============
+DASHBOARD_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArcisAI Sales Agent</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#333}
+.header{background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:white;padding:20px 30px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:24px}.header span{font-size:14px;opacity:0.8}
+.container{max-width:1200px;margin:20px auto;padding:0 20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:25px}
+.stat-card{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.stat-card h3{font-size:14px;color:#666;margin-bottom:5px}.stat-card .num{font-size:32px;font-weight:700;color:#1e3a8a}
+.stat-card .num.green{color:#16a34a}
+.card{background:white;border-radius:12px;padding:25px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:20px}
+.card h2{color:#1e3a8a;margin-bottom:15px;font-size:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+label{display:block;font-size:14px;font-weight:600;color:#555;margin-bottom:5px}
+input,select,textarea{width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:14px;transition:border 0.2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#3b82f6}
+textarea{grid-column:1/-1;height:80px;resize:vertical}
+.btn{background:#1e3a8a;color:white;border:none;padding:12px 30px;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s}
+.btn:hover{background:#1e40af}.btn:disabled{background:#94a3b8;cursor:not-allowed}
+.btn-row{grid-column:1/-1;text-align:right;margin-top:5px}
+.leads-table{width:100%;border-collapse:collapse;margin-top:10px}
+.leads-table th{background:#f8fafc;padding:12px;text-align:left;font-size:13px;color:#666;border-bottom:2px solid #e2e8f0}
+.leads-table td{padding:12px;border-bottom:1px solid #f1f5f9;font-size:14px}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.badge-sent{background:#dcfce7;color:#166534}.badge-failed{background:#fef2f2;color:#991b1b}
+.badge-pending{background:#fef9c3;color:#854d0e}.badge-skipped{background:#f1f5f9;color:#64748b}
+.badge-high{background:#fee2e2;color:#991b1b}.badge-medium{background:#fef9c3;color:#854d0e}.badge-normal{background:#e0f2fe;color:#075985}
+.score{font-weight:700;font-size:16px}
+.score-high{color:#dc2626}.score-med{color:#d97706}.score-low{color:#2563eb}
+.msg{padding:12px 16px;border-radius:8px;margin-bottom:15px;display:none}
+.msg-ok{background:#dcfce7;color:#166534;display:block}.msg-err{background:#fef2f2;color:#991b1b;display:block}
+.upload-area{grid-column:1/-1;border:2px dashed #cbd5e1;border-radius:8px;padding:30px 20px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.upload-area:hover{border-color:#3b82f6;background:#f0f7ff}
+.upload-area.drag-over{border-color:#3b82f6;background:#dbeafe;border-width:3px}
+.upload-area input{display:none}
+.channel-badges{display:flex;gap:4px;flex-wrap:wrap}
+@media(max-width:768px){.form-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>ArcisAI Sales Agent</h1>
+    <span>AI-Powered Lead Management</span>
+</div>
+<div class="container">
+    <div class="stats" id="stats">
+        <div class="stat-card"><h3>Total Leads</h3><div class="num" id="s-total">0</div></div>
+        <div class="stat-card"><h3>Emails Sent</h3><div class="num" id="s-sent">0</div></div>
+        <div class="stat-card"><h3>WhatsApp Sent</h3><div class="num green" id="s-wa">0</div></div>
+        <div class="stat-card"><h3>Avg Score</h3><div class="num" id="s-score">0</div></div>
+        <div class="stat-card"><h3>Today</h3><div class="num" id="s-today">0</div></div>
+    </div>
+
+    <div class="card">
+        <h2>Add New Lead</h2>
+        <div id="msg"></div>
+        <form id="leadForm" class="form-grid">
+            <div><label>Full Name *</label><input name="name" required placeholder="e.g. Rajesh Kumar"></div>
+            <div><label>Email *</label><input name="email" type="email" required placeholder="e.g. rajesh@company.com"></div>
+            <div><label>Company</label><input name="company" placeholder="e.g. ABC Industries"></div>
+            <div><label>Phone (for WhatsApp)</label><input name="phone" placeholder="e.g. +91 98765 43210"></div>
+            <div><label>Customer Type</label>
+                <select name="customer_type">
+                    <option value="">Select...</option>
+                    <option value="government">Government / PSU</option>
+                    <option value="enterprise">Enterprise / Corporate</option>
+                    <option value="si">System Integrator</option>
+                    <option value="dealer">Dealer / Distributor</option>
+                    <option value="residential">Residential</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div><label>Quantity</label><input name="quantity" placeholder="e.g. 50 cameras"></div>
+            <textarea name="requirement" placeholder="Describe what they need... e.g. 50 bullet cameras for warehouse surveillance with night vision"></textarea>
+            <div class="btn-row"><button type="submit" class="btn" id="submitBtn">Send Email + WhatsApp & Save Lead</button></div>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Upload CSV of Leads â€” Auto Email + WhatsApp</h2>
+        <p style="color:#666;font-size:14px;margin-bottom:10px">Upload your daily inbound leads CSV. The AI agent will <strong>automatically send personalized emails AND WhatsApp messages</strong> to every lead.</p>
+        <p style="color:#888;font-size:13px;margin-bottom:12px">CSV format: <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">name, email, company, phone, requirement, customer_type</code>
+        &nbsp; <a href="#" onclick="downloadSampleCSV();return false" style="color:#3b82f6;font-size:13px">Download Sample CSV</a></p>
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('csvFile').click()"
+             ondragover="event.preventDefault();event.stopPropagation();this.classList.add('drag-over')"
+             ondragleave="event.preventDefault();event.stopPropagation();this.classList.remove('drag-over')"
+             ondrop="event.preventDefault();event.stopPropagation();this.classList.remove('drag-over');handleDrop(event)">
+            <input type="file" id="csvFile" accept=".csv" onchange="uploadCSV(this)">
+            <div style="font-size:36px;margin-bottom:8px">&#128196;</div>
+            <p style="color:#444;font-weight:600;font-size:15px" id="uploadLabel">Click here or drag & drop your CSV file</p>
+            <p style="color:#888;font-size:12px;margin-top:4px">Accepts .csv files only</p>
+        </div>
+        <div id="csvProgress" style="display:none;margin-top:15px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span id="csvProgressText" style="font-size:14px;font-weight:600;color:#1e3a8a">Processing...</span>
+                <span id="csvProgressCount" style="font-size:14px;color:#666">0 / 0</span>
+            </div>
+            <div style="background:#e2e8f0;border-radius:8px;height:12px;overflow:hidden">
+                <div id="csvBar" style="background:linear-gradient(90deg,#3b82f6,#1e3a8a);height:100%;border-radius:8px;width:0%;transition:width 0.3s"></div>
+            </div>
+        </div>
+        <div id="csvResults" style="display:none;margin-top:15px">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
                 <div style="background:#dcfce7;border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:#166534" id="csvEmails">0</div><div style="font-size:12px;color:#166534">Emails Sent</div></div>
                 <div style="background:#dcfce7;border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:#166534" id="csvWA">0</div><div style="font-size:12px;color:#166534">WhatsApp Sent</div></div>
                 <div style="background:#fef2f2;border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:#991b1b" id="csvFailed">0</div><div style="font-size:12px;color:#991b1b">Failed</div></div>
@@ -98,7 +478,7 @@ document.getElementById('leadForm').onsubmit = async (e) => {
     btn.disabled = false; btn.textContent = 'Send Email + WhatsApp & Save Lead';
 };
 function downloadSampleCSV() {
-    const csv = 'name,email,company,phone,requirement,customer_type\\nRajesh Kumar,rajesh@techsol.in,TechSol Industries,+919876543210,50 bullet cameras for warehouse with night vision,si\\nPriya Mehta,priya@govproject.in,Gujarat Smart City,+919123456789,200 ANPR cameras for highway monitoring,government\\nAmit Shah,amit@securenet.com,SecureNet Dealers,+919555123456,Looking to become ArcisAI dealer in Rajasthan,dealer\\nSneha Patel,sneha@enterprise.co,Enterprise Corp,+919444567890,100 dome cameras for corporate office security,enterprise';
+    const csv = 'name,email,company,phone,requirement,customer_type\\nRajesh Kumar,rajesh@techsol.in,TechSol Industries,+919876543210,50 bullet cameras for warehouse with night vision,si\\nPriya Mehta,priya@govproject.in,Gujarat Smart City,+919123456789,200 ANPR cameras for highway monitoring,government\\nAmit Shah,amit@securenet.com,SecureNet Dealers,+919555123456,Looking to become ArcisAI dealer in Rajasthan,dealer\\nSneha Patel,snehh@enterprise.co,Enterprise Corp,+919444567890,100 dome cameras for corporate office security,enterprise';
     const blob = new Blob([csv], {type: 'text/csv'});
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'arcisai_leads_sample.csv'; a.click();
 }
