@@ -419,16 +419,39 @@ textarea{grid-column:1/-1;height:80px;resize:vertical}
         </form>
     </div>
 
-    <div class="card">
-        <h2>Upload CSV of Leads</h2>
-        <p style="color:#666;font-size:14px;margin-bottom:10px">CSV format: name, email, company, phone, requirement, customer_type</p>
-        <div class="upload-area" onclick="document.getElementById('csvFile').click()">
+        <div class="card">
+        <h2>Upload CSV of Leads — Auto Email + WhatsApp</h2>
+        <p style="color:#666;font-size:14px;margin-bottom:10px">Upload your daily inbound leads CSV. The AI agent will <strong>automatically send personalized emails AND WhatsApp messages</strong> to every lead.</p>
+        <p style="color:#888;font-size:13px;margin-bottom:12px">CSV format: <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">name, email, company, phone, requirement, customer_type</code>
+        &nbsp; <a href="#" onclick="downloadSampleCSV();return false" style="color:#3b82f6;font-size:13px">Download Sample CSV</a></p>
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('csvFile').click()">
             <input type="file" id="csvFile" accept=".csv" onchange="uploadCSV(this)">
-            <p style="color:#666">Click to upload CSV file</p>
+            <p style="color:#666" id="uploadLabel">Click or drag CSV file here to upload & auto-fire messages</p>
+        </div>
+        <div id="csvProgress" style="display:none;margin-top:15px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span id="csvProgressText" style="font-size:14px;font-weight:600;color:#1e3a8a">Processing...</span>
+                <span id="csvProgressCount" style="font-size:14px;color:#666">0 / 0</span>
+            </div>
+            <div style="background:#e2e8f0;border-radius:8px;height:12px;overflow:hidden">
+                <div id="csvBar" style="background:linear-gradient(90deg,#3b82f6,#1e3a8a);height:100%;border-radius:8px;width:0%;transition:width 0.3s"></div>
+            </div>
+        </div>
+        <div id="csvResults" style="display:none;margin-top:15px">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
+                <div style="background:#dcfce7;border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:#166534" id="csvEmails">0</div><div style="font-size:12px;color:#166534">Emails Sent</div></div>
+                <div style="background:#dcfce7;border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:#166534" id="csvWA">0</div><div style="font-size:12px;color:#166534">WhatsApp Sent</div></div>
+                <div style="background:#fef2f2;border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:#991b1b" id="csvFailed">0</div><div style="font-size:12px;color:#991b1b">Failed</div></div>
+                <div style="background:#f0f4f8;border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:700;color:#1e3a8a" id="csvTotal">0</div><div style="font-size:12px;color:#1e3a8a">Total Rows</div></div>
+            </div>
+            <table class="leads-table" id="csvResultsTable" style="display:none">
+                <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Email Status</th><th>WhatsApp Status</th><th>Score</th></tr></thead>
+                <tbody id="csvResultsBody"></tbody>
+            </table>
+            <div style="text-align:center;margin-top:10px"><a href="#" onclick="document.getElementById('csvResultsTable').style.display=document.getElementById('csvResultsTable').style.display==='none'?'table':'none';return false" style="color:#3b82f6;font-size:13px">Toggle row details</a></div>
         </div>
     </div>
-
-    <div class="card">
+<div class="card">
         <h2>Recent Leads</h2>
         <table class="leads-table">
             <thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Score</th><th>Priority</th><th>Channels</th><th>Date</th></tr></thead>
@@ -462,27 +485,68 @@ document.getElementById('leadForm').onsubmit = async (e) => {
     } catch(err) { showMsg('Network error: ' + err.message, false); }
     btn.disabled = false; btn.textContent = 'Send Email + WhatsApp & Save Lead';
 };
+async function downloadSampleCSV() {
+    const csv = 'name,email,company,phone,requirement,customer_type\\nRajesh Kumar,rajesh@techsol.in,TechSol Industries,+919876543210,50 bullet cameras for warehouse with night vision,si\\nPriya Mehta,priya@govproject.in,Gujarat Smart City,+919123456789,200 ANPR cameras for highway monitoring,government\\nAmit Shah,amit@securenet.com,SecureNet Dealers,+919555123456,Looking to become ArcisAI dealer in Rajasthan,dealer\\nSneha Patel,sneha@enterprise.co,Enterprise Corp,+919444567890,100 dome cameras for corporate office security,enterprise';
+    const blob = new Blob([csv], {type: 'text/csv'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'arcisai_leads_sample.csv'; a.click();
+}
 async function uploadCSV(input) {
     const file = input.files[0]; if (!file) return;
     const text = await file.text();
-    const lines = text.trim().split('\\n').slice(1);
-    let sent = 0, failed = 0;
+    const lines = text.trim().split('\\n').slice(1).filter(l => l.trim());
+    if (!lines.length) { showMsg('CSV is empty or has no data rows', false); return; }
+    const total = lines.length;
+    let emailsSent=0, waSent=0, failed=0, processed=0;
+    const progDiv = document.getElementById('csvProgress');
+    const bar = document.getElementById('csvBar');
+    const pText = document.getElementById('csvProgressText');
+    const pCount = document.getElementById('csvProgressCount');
+    const resDiv = document.getElementById('csvResults');
+    const resBody = document.getElementById('csvResultsBody');
+    progDiv.style.display='block'; resDiv.style.display='none'; resBody.innerHTML='';
+    document.getElementById('uploadArea').style.pointerEvents='none'; document.getElementById('uploadArea').style.opacity='0.5';
+    document.getElementById('uploadLabel').textContent='Processing leads...';
     for (const line of lines) {
         const [name, email, company, phone, ...rest] = line.split(',').map(s => s.trim().replace(/^"|"$/g, ''));
-        if (!name || !email) { failed++; continue; }
+        processed++;
+        pText.textContent = 'Sending to ' + (name||email||'lead') + '...';
+        pCount.textContent = processed + ' / ' + total;
+        bar.style.width = Math.round(processed/total*100) + '%';
+        if (!name || !email) {
+            failed++;
+            resBody.innerHTML += '<tr><td>'+(name||'-')+'</td><td>'+(email||'-')+'</td><td>-</td><td><span class=\"badge badge-failed\">Missing data</span></td><td>-</td><td>-</td></tr>';
+            continue;
+        }
         const requirement = rest.length > 1 ? rest.slice(0, -1).join(',') : (rest[0] || 'CCTV cameras');
         const customer_type = rest.length > 1 ? rest[rest.length - 1] : '';
         try {
             const r = await fetch(API + '/api/lead', {method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({name, email, company: company||'', phone: phone||'', requirement, customer_type})});
             const j = await r.json();
-            if (j.success) sent++; else failed++;
-        } catch(e) { failed++; }
+            if (j.success) {
+                const es = j.lead.email_status||'?'; const ws = j.lead.whatsapp_status||'skipped';
+                if (es==='sent') emailsSent++;
+                if (ws==='sent') waSent++;
+                const eBadge = es==='sent'?'badge-sent':'badge-failed';
+                const wBadge = ws==='sent'?'badge-sent':ws==='skipped'?'badge-skipped':'badge-failed';
+                resBody.innerHTML += '<tr><td>'+name+'</td><td>'+email+'</td><td>'+(phone||'-')+'</td><td><span class=\"badge '+eBadge+'\">'+es+'</span></td><td><span class=\"badge '+wBadge+'\">'+ws+'</span></td><td>'+(j.lead.score||0)+'</td></tr>';
+            } else { failed++; resBody.innerHTML += '<tr><td>'+name+'</td><td>'+email+'</td><td>'+(phone||'-')+'</td><td><span class=\"badge badge-failed\">error</span></td><td>-</td><td>-</td></tr>'; }
+        } catch(e) { failed++; resBody.innerHTML += '<tr><td>'+name+'</td><td>'+email+'</td><td>'+(phone||'-')+'</td><td><span class=\"badge badge-failed\">network error</span></td><td>-</td><td>-</td></tr>'; }
     }
-    showMsg(`CSV processed: ${sent} sent, ${failed} failed`, sent > 0);
-    loadLeads(); input.value = '';
+    pText.textContent = 'Done!'; bar.style.width='100%'; bar.style.background='linear-gradient(90deg,#16a34a,#22c55e)';
+    resDiv.style.display='block';
+    document.getElementById('csvEmails').textContent=emailsSent;
+    document.getElementById('csvWA').textContent=waSent;
+    document.getElementById('csvFailed').textContent=failed;
+    document.getElementById('csvTotal').textContent=total;
+    document.getElementById('csvResultsTable').style.display='table';
+    showMsg('CSV done! '+emailsSent+' emails + '+waSent+' WhatsApp sent to '+total+' leads', emailsSent>0);
+    loadLeads(); input.value='';
+    document.getElementById('uploadArea').style.pointerEvents='auto'; document.getElementById('uploadArea').style.opacity='1';
+    document.getElementById('uploadLabel').textContent='Click or drag CSV file here to upload & auto-fire messages';
+    setTimeout(()=>{bar.style.background='linear-gradient(90deg,#3b82f6,#1e3a8a)';},3000);
 }
-async function loadLeads() {
+function loadLeads() {
     try {
         const r = await fetch(API + '/api/leads');
         const leads = await r.json();
