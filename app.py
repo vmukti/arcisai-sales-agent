@@ -291,7 +291,7 @@ def send_email_resend(to_email, subject, html_body):
         method="POST"
     )
     try:
-        resp = urllib.request.urlopen(req, timeout=10)
+        resp = urllib.request.urlopen(req, timeout=15)
         result = json.loads(resp.read().decode())
         print(f"[EMAIL] SUCCESS: {result}")
         return True
@@ -304,8 +304,7 @@ def send_email_resend(to_email, subject, html_body):
         raise
 
 def send_email_smtp(to_email, subject, html_body):
-    """Send email via SMTP (Gmail/Google Workspace)"""
-    print(f"[SMTP] Sending to {to_email} from {SMTP_USER} via {SMTP_HOST}...")
+    """Send email via SMTP (for servers that allow outbound SMTP)"""
     msg = MIMEMultipart("alternative")
     msg["From"] = f"{FROM_NAME} <{SMTP_USER}>"
     msg["To"] = to_email
@@ -329,23 +328,13 @@ def send_email_smtp(to_email, subject, html_body):
     raise Exception(" | ".join(errors))
 
 def send_email(to_email, subject, html_body):
-    """Try SMTP first (Gmail/Google Workspace), fall back to Resend API"""
-    errors = []
-    # Try SMTP first if credentials are available
-    if SMTP_USER and SMTP_PASS:
-        try:
-            print(f"[EMAIL] Trying SMTP ({SMTP_USER})...")
-            return send_email_smtp(to_email, subject, html_body)
-        except Exception as e:
-            errors.append(f"SMTP: {str(e)}")
-            print(f"[EMAIL] SMTP failed: {str(e)}, trying Resend...")
-    # Fall back to Resend API
-    if RESEND_API_KEY:
-        try:
-            return send_email_resend(to_email, subject, html_body)
-        except Exception as e:
-            errors.append(f"Resend: {str(e)}")
-    raise Exception("All email methods failed: " + " | ".join(errors))
+    """Route to correct email provider"""
+    if EMAIL_PROVIDER == "resend" and RESEND_API_KEY:
+        return send_email_resend(to_email, subject, html_body)
+    elif EMAIL_PROVIDER == "smtp":
+        return send_email_smtp(to_email, subject, html_body)
+    else:
+        raise Exception("No email provider configured. Set RESEND_API_KEY or EMAIL_PROVIDER=smtp")
 
 # ============ HTML TEMPLATE ============
 DASHBOARD_HTML = """<!DOCTYPE html>
@@ -432,7 +421,7 @@ textarea{grid-column:1/-1;height:80px;resize:vertical}
     </div>
 
     <div class="card">
-        <h2>Upload CSV of Leads Ã¢ÂÂ Auto Email + WhatsApp</h2>
+        <h2>Upload CSV of Leads — Auto Email + WhatsApp</h2>
         <p style="color:#666;font-size:14px;margin-bottom:10px">Upload your daily inbound leads CSV. The AI agent will <strong>automatically send personalized emails AND WhatsApp messages</strong> to every lead.</p>
         <p style="color:#888;font-size:13px;margin-bottom:12px">CSV format: <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px">name, email, company, phone, requirement, customer_type</code>
         &nbsp; <a href="#" onclick="downloadSampleCSV();return false" style="color:#3b82f6;font-size:13px">Download Sample CSV</a></p>
@@ -504,7 +493,7 @@ document.getElementById('leadForm').onsubmit = async (e) => {
     btn.disabled = false; btn.textContent = 'Send Email + WhatsApp & Save Lead';
 };
 function downloadSampleCSV() {
-    const csv = 'name,email,company,phone,requirement,customer_type\\nRajesh Kumar,rajesh@techsol.in,TechSol Industries,+919876543210,50 bullet cameras for warehouse with night vision,si\\nPriya Mehta,priya@govproject.in,Gujarat Smart City,+919123456789,200 ANPR cameras for highway monitoring,government\\nAmit Shah,amit@securenet.com,SecureNet Dealers,+919555123456,Looking to become ArcisAI dealer in Rajasthan,dealer\\nSneha Patel,snehh@enterprise.co,Enterprise Corp,+919444567890,100 dome cameras for corporate office security,enterprise';
+    const csv = 'name,email,company,phone,requirement,customer_type\\nRajesh Kumar,rajesh@techsol.in,TechSol Industries,+919876543210,50 bullet cameras for warehouse with night vision,si\\nPriya Mehta,priya@govproject.in,Gujarat Smart City,+919123456789,200 ANPR cameras for highway monitoring,government\\nAmit Shah,amit@securenet.com,SecureNet Dealers,+919555123456,Looking to become ArcisAI dealer in Rajasthan,dealer\\nSneha Patel,sneha@enterprise.co,Enterprise Corp,+919444567890,100 dome cameras for corporate office security,enterprise';
     const blob = new Blob([csv], {type: 'text/csv'});
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'arcisai_leads_sample.csv'; a.click();
 }
@@ -685,7 +674,8 @@ def add_lead():
         save_leads(leads)
 
         email_ok = email_status.startswith("sent")
-        overall_success = email_ok
+        wa_ok = whatsapp_status.startswith("sent") or whatsapp_status == "skipped"
+        overall_success = email_ok  # Lead saved even if WA fails
         return jsonify({
             "success": overall_success,
             "lead": lead,
@@ -717,38 +707,49 @@ def health():
         }
     })
 
-
 @app.route("/api/test")
 def test_config():
     """Debug endpoint - tests all configurations and sends test email/WhatsApp"""
     results = {"email_provider": EMAIL_PROVIDER, "from_email": FROM_EMAIL}
+
+    # Test Resend API key
     if RESEND_API_KEY:
         results["resend_key"] = f"set ({len(RESEND_API_KEY)} chars, starts with {RESEND_API_KEY[:6]}...)"
     else:
         results["resend_key"] = "NOT SET"
+
+    # Test SMTP
     results["smtp_user"] = SMTP_USER or "NOT SET"
+
+    # Test Twilio config
     if TWILIO_ACCOUNT_SID:
         results["twilio_sid"] = f"set ({TWILIO_ACCOUNT_SID[:8]}...)"
     else:
         results["twilio_sid"] = "NOT SET"
     results["twilio_token"] = "set" if TWILIO_AUTH_TOKEN else "NOT SET"
     results["twilio_from"] = TWILIO_WHATSAPP_FROM or "NOT SET"
+
+    # Try sending a test email to the SMTP_USER (yourself)
     test_email = request.args.get("email", "")
     test_phone = request.args.get("phone", "")
+
     if test_email:
         try:
             send_email(test_email, "ArcisAI Test - Email Working!", "<h2>Email is working!</h2><p>Your ArcisAI Sales Agent email setup is confirmed.</p>")
             results["email_test"] = f"SUCCESS - sent to {test_email}"
         except Exception as e:
             results["email_test"] = f"FAILED - {str(e)}"
+
     if test_phone:
         try:
             success, detail = send_whatsapp_twilio(test_phone, "ArcisAI Test - WhatsApp is working! Your sales agent is live.")
             results["whatsapp_test"] = f"SUCCESS - {detail}"
         except Exception as e:
             results["whatsapp_test"] = f"FAILED - {str(e)}"
+
     if not test_email and not test_phone:
         results["usage"] = "Add ?email=you@email.com&phone=+919687779999 to test sending"
+
     return jsonify(results)
 
 if __name__ == "__main__":
